@@ -10,7 +10,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>WalletChango </title>
+    <title>AdminLTE 3 | Starter</title>
     <link href="/css/app.css" rel="stylesheet">
 
 
@@ -75,15 +75,41 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
 
-                    <li class="nav-item">
-                        <router-link to="/dashboard" class="nav-link">
+
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt blue"></i>
                             <p>
-                                Members
-                                <!--<span class="right badge badge-danger">New</span>-->
+                                Chamaa <i class="fa fa-angle-left right"></i>
                             </p>
-                        </router-link>
+                        </a>
+                        <ul class="nav nav-treeview" style="display: none;">
+
+                            <li class="nav-item">
+                                <router-link to="/chamaa" class="nav-link">
+                                    <i class="fas fa-circle-o nav-icon"></i>
+
+                                    <p>
+                                        Chamaas
+                                        <!--<span class="right badge badge-danger">New</span>-->
+                                    </p>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../UI/buttons.html" class="nav-link">
+                                    <i class="fas fa-circle-o nav-icon"></i>
+                                    <p>Buttons</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../UI/sliders.html" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>Sliders</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
+
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

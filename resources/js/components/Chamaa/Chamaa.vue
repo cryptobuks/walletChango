@@ -14,19 +14,19 @@
 
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-3 col-sm-6 col-12">
+                            <div v-for="chama in all_chamas" class="col-md-3 col-sm-6 col-12">
                                 <div class="info-box bg-info">
                                     <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Members</span>
-                                        <span class="info-box-number">41,410</span>
+                                        <span class="info-box-text">{{chama.chamaa_name}}</span>
+                                        <span class="info-box-number">{{chama.members_count}} Members</span>
 
                                         <div class="progress">
-                                            <div class="progress-bar" style="width: 70%"></div>
+                                            <div class="progress-bar" :style="{width: chama.members_count+'%'}"></div>
                                         </div>
                                         <span class="progress-description">
-                                          70% Increase in 30 Days
+                                          30% Increase in 30 Days
                                         </span>
                                     </div>
                                     <!-- /.info-box-content -->
@@ -57,7 +57,13 @@
 </template>
 
 <script>
+
     export default {
+        data() {
+            return {
+                all_chamas: []
+            }
+        },
         mounted() {
             console.log('Component mounted.')
         }, methods: {
@@ -65,7 +71,30 @@
             open_my_modal() {
 
                 $("#create_user").modal('show');
+            },
+            /**chamaa data**/
+            fetch_all_chama() {
+                this.$store.dispatch("getChamas")
+            },
+        },
+        computed: {
+            load_all_chama() {
+                let _chamaa = this.$store.getters.ALL_CHAMAS;
+                this.all_chamas = _chamaa;
+                return _chamaa;
+
             }
+        },
+        created() {
+            this.fetch_all_chama();
+        },
+        watch: {
+            load_all_chama(old, new_) {
+                if (old != new_) {
+                    this.all_chamas = old;
+                }
+            }
+
         }
     }
 </script>

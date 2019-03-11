@@ -1839,6 +1839,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      all_chamas: []
+    };
+  },
   mounted: function mounted() {
     console.log('Component mounted.');
   },
@@ -1846,6 +1851,28 @@ __webpack_require__.r(__webpack_exports__);
     /** open creating/update of chamaa information**/
     open_my_modal: function open_my_modal() {
       $("#create_user").modal('show');
+    },
+
+    /**chamaa data**/
+    fetch_all_chama: function fetch_all_chama() {
+      this.$store.dispatch("getChamas");
+    }
+  },
+  computed: {
+    load_all_chama: function load_all_chama() {
+      var _chamaa = this.$store.getters.ALL_CHAMAS;
+      this.all_chamas = _chamaa;
+      return _chamaa;
+    }
+  },
+  created: function created() {
+    this.fetch_all_chama();
+  },
+  watch: {
+    load_all_chama: function load_all_chama(old, new_) {
+      if (old != new_) {
+        this.all_chamas = old;
+      }
     }
   }
 });
@@ -36915,7 +36942,43 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm._m(0)
+          _c("div", { staticClass: "card-body" }, [
+            _c(
+              "div",
+              { staticClass: "row" },
+              _vm._l(_vm.all_chamas, function(chama) {
+                return _c("div", { staticClass: "col-md-3 col-sm-6 col-12" }, [
+                  _c("div", { staticClass: "info-box bg-info" }, [
+                    _vm._m(0, true),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "info-box-content" }, [
+                      _c("span", { staticClass: "info-box-text" }, [
+                        _vm._v(_vm._s(chama.chamaa_name))
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "info-box-number" }, [
+                        _vm._v(_vm._s(chama.members_count) + " Members")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "progress" }, [
+                        _c("div", {
+                          staticClass: "progress-bar",
+                          style: { width: chama.members_count + "%" }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "progress-description" }, [
+                        _vm._v(
+                          "\n                                      30% Increase in 30 Days\n                                    "
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              }),
+              0
+            )
+          ])
         ])
       ])
     ]),
@@ -36928,37 +36991,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-3 col-sm-6 col-12" }, [
-          _c("div", { staticClass: "info-box bg-info" }, [
-            _c("span", { staticClass: "info-box-icon" }, [
-              _c("i", { staticClass: "fa fa-bookmark-o" })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "info-box-content" }, [
-              _c("span", { staticClass: "info-box-text" }, [_vm._v("Members")]),
-              _vm._v(" "),
-              _c("span", { staticClass: "info-box-number" }, [
-                _vm._v("41,410")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "progress" }, [
-                _c("div", {
-                  staticClass: "progress-bar",
-                  staticStyle: { width: "70%" }
-                })
-              ]),
-              _vm._v(" "),
-              _c("span", { staticClass: "progress-description" }, [
-                _vm._v(
-                  "\n                                      70% Increase in 30 Days\n                                    "
-                )
-              ])
-            ])
-          ])
-        ])
-      ])
+    return _c("span", { staticClass: "info-box-icon" }, [
+      _c("i", { staticClass: "fa fa-bookmark-o" })
     ])
   },
   function() {
@@ -52983,10 +53017,34 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
+var baseURL = "http://127.0.0.1:8000/api";
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
-  state: {},
-  mutations: {},
-  actions: {}
+  state: {
+    all_chamas: []
+  },
+  mutations: {
+    SET_ALL_CHAMAS: function SET_ALL_CHAMAS(state, payload) {
+      state.all_chamas = payload;
+      return;
+    }
+  },
+  actions: {
+    getChamas: function getChamas(context) {
+      var response_data = {};
+      axios.get(baseURL + '/chamaa').then(function (response) {
+        context.commit("SET_ALL_CHAMAS", response.data);
+        response_data = response.data;
+      }).catch(function (error) {
+        return error;
+      });
+      return response_data;
+    }
+  },
+  getters: {
+    ALL_CHAMAS: function ALL_CHAMAS(state) {
+      return state.all_chamas;
+    }
+  }
 });
 /* harmony default export */ __webpack_exports__["default"] = (store);
 

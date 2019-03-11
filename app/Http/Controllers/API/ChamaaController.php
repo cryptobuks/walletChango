@@ -33,10 +33,21 @@ class ChamaaController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
-        //
+
+        $this->validate($request, [
+            'chamaa_name' => 'required',
+            'members_count' => 'required|integer|max:191',
+        ]);
+        $new_chamaa = new Chamaa();
+        $new_chamaa->chamaa_name = $request->all()['chamaa_name'];
+        $new_chamaa->members_count = $request->all()['members_count'];
+        $new_chamaa->chamaa_uuid = $request->all()['chamaa_uuid'];
+        $new_chamaa->save();
+        return response(Chamaa::all());
     }
 
     /**

@@ -6,16 +6,20 @@ const baseURL = "http://127.0.0.1:8000/api";
 
 const store = new Vuex.Store({
     state: {
-        all_chamas: []
+        all_chamas: [],
+        chamaa_created_status: []
     },
     mutations: {
         SET_ALL_CHAMAS: (state, payload) => {
-             state.all_chamas = payload;
+            return state.all_chamas = payload;
+
+        }, SET_CHAMAA_CREATE_RESPONSE: (state, payload) => {
+            state.chamaa_created_status = payload
             return
         }
     },
     actions: {
-        getChamas: (context) => {
+        get_chamas: (context) => {
             let response_data = {};
             axios.get(baseURL + '/chamaa').then(response => {
                 context.commit("SET_ALL_CHAMAS", response.data);
@@ -24,10 +28,24 @@ const store = new Vuex.Store({
                 return error;
             })
             return response_data
+        }, save_chamas: (context, payload) => {
+            axios.post(baseURL + '/chamaa', payload).then(response => {
+                context.commit("SET_ALL_CHAMAS", response.data);
+                toast.fire({
+                    type: 'success',
+                    title: 'Chamaa Created successfully'
+                })
+                if (response.status == 200) {
+                    context.commit("SET_CHAMAA_CREATE_RESPONSE", 1);
+                }
+                return response;
+
+            })
         }
     },
     getters: {
         ALL_CHAMAS: state => state.all_chamas,
+        CHAMAA_CREATION_RESPONSE: state => state.chamaa_created_status
     }
 
 })

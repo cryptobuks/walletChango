@@ -11,14 +11,29 @@ import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import store from './store/store'
 import routes from './routes'
+import {AlertError, Form, HasError} from 'vform'
+import swal from 'sweetalert2'
 
 
+
+window.Form = Form;
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
 Vue.use(VueRouter)
 Vue.use(Vuex)
 
 
+
 window.Fire = new Vue();
 
+window.swal = swal;
+const toast = swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+});
+window.toast = toast;;
 
 /**
  * The following block of code may be used to automatically register your

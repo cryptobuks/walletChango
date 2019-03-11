@@ -9,6 +9,6 @@ class   Chamaa extends Model
     protected $table = "tbl_chamaa";
 
     protected $fillable = [
-        'chamaa_name', 'members_count', 'chamaa_uuid',
+        'payment_reference', 'payment_amount', 'user_id', 'project_id', 'chamaa_id',
     ];
 }

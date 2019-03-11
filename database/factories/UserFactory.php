@@ -1,6 +1,7 @@
 <?php
 
 use App\Chamaa;
+use App\Payments_;
 use App\User;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
@@ -32,5 +33,16 @@ $factory->define(Chamaa::class, function (Faker $faker) {
         'created_at' => now(),
         'updated_at' => now(),
         'chamaa_uuid' => $faker->name,
+    ];
+});
+$factory->define(Payments_::class, function (Faker $faker) {
+    return [
+        'payment_reference' => $faker->name,
+        'payment_amount' => $faker->randomNumber(),
+        'user_id' => $faker->randomNumber(),
+        'project_id' => $faker->randomNumber(),
+        'chamaa_id' =>App\Chamaa::all()->random()->id,
+        'updated_at' => now(),
+        'created_at' => now(),
     ];
 });

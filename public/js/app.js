@@ -1872,6 +1872,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1899,6 +1901,15 @@ __webpack_require__.r(__webpack_exports__);
     },
     create_chamaa: function create_chamaa() {
       this.$store.dispatch("save_chamas", this.form);
+    },
+    view_chamaa: function view_chamaa(payload) {
+      this.$router.push({
+        name: 'chamaa-view',
+        path: "chamaa-view/".concat(payload),
+        params: {
+          'chamaa_id': payload
+        }
+      });
     }
   },
   computed: {
@@ -1926,6 +1937,176 @@ __webpack_require__.r(__webpack_exports__);
         $('#create_chamaa').modal('hide');
       } else {
         swal.fire('Failed!', 'There Was an Problem Please try again.', 'error');
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Chamaa/ChamaaDetail.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Chamaa/ChamaaDetail.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['chamaa_id'],
+  data: function data() {
+    return {
+      all_payments: []
+    };
+  },
+  mounted: function mounted() {
+    console.log('Component mounted.');
+  },
+  methods: {
+    fetch_payments: function fetch_payments() {
+      this.$store.dispatch('get_payments', this.chamaa_id);
+    }
+  },
+  computed: {
+    load_all_payments: function load_all_payments() {
+      return this.all_payments = this.$store.getters.ALL_PAYMENTS;
+    }
+  },
+  created: function created() {
+    this.fetch_payments();
+  },
+  watch: {
+    load_all_payments: function load_all_payments(new_, old) {
+      if (new_ != old) {
+        this.all_payments = new_;
       }
     }
   }
@@ -40599,7 +40780,23 @@ var render = function() {
                         _vm._v(
                           "\n                                      30% Increase in 30 Days\n                                    "
                         )
-                      ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn",
+                          on: {
+                            click: function($event) {
+                              return _vm.view_chamaa(chama.id)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v("View"),
+                          _c("i", { staticClass: " fas fa-tachometer-alt" })
+                        ]
+                      )
                     ])
                   ])
                 ])
@@ -40817,6 +41014,261 @@ var staticRenderFns = [
       _c("div", { staticClass: "col-3" }, [
         _c("label", { attrs: { for: "chamaa_name" } })
       ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Chamaa/ChamaaDetail.vue?vue&type=template&id=f21531f6&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Chamaa/ChamaaDetail.vue?vue&type=template&id=f21531f6& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "container-fluid" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-sm-8" }, [
+          _c("div", { staticClass: "card" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body p-0" }, [
+              _c("div", { staticClass: "table-responsive" }, [
+                _c("table", { staticClass: "table m-0" }, [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.all_payments, function(payments) {
+                      return _c("tr", [
+                        _c("td", [
+                          _c(
+                            "a",
+                            { attrs: { href: "pages/examples/invoice.html" } },
+                            [_vm._v(_vm._s(payments.payment_reference))]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(payments.payment_amount))]),
+                        _vm._v(" "),
+                        _vm._m(3, true),
+                        _vm._v(" "),
+                        _vm._m(4, true)
+                      ])
+                    }),
+                    0
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(5)
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-3 col-6" }, [
+        _c("div", { staticClass: "small-box bg-info" }, [
+          _c("div", { staticClass: "inner" }, [
+            _c("h3", [_vm._v("150")]),
+            _vm._v(" "),
+            _c("p", [_vm._v("Members")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "icon" }, [
+            _c("i", { staticClass: "ion ion-bag" })
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
+            _vm._v("More info "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-3 col-6" }, [
+        _c("div", { staticClass: "small-box bg-success" }, [
+          _c("div", { staticClass: "inner" }, [
+            _c("h3", [
+              _vm._v("53"),
+              _c("sup", { staticStyle: { "font-size": "20px" } }, [_vm._v("%")])
+            ]),
+            _vm._v(" "),
+            _c("p", [_vm._v("Members Contribution")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "icon" }, [
+            _c("i", { staticClass: "ion ion-stats-bars" })
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
+            _vm._v("More info "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-3 col-6" }, [
+        _c("div", { staticClass: "small-box bg-warning" }, [
+          _c("div", { staticClass: "inner" }, [
+            _c("h3", [_vm._v("44")]),
+            _vm._v(" "),
+            _c("p", [_vm._v("Projects Running")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "icon" }, [
+            _c("i", { staticClass: "ion ion-person-add" })
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
+            _vm._v("More info "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-3 col-6" }, [
+        _c("div", { staticClass: "small-box bg-danger" }, [
+          _c("div", { staticClass: "inner" }, [
+            _c("h3", [_vm._v("65")]),
+            _vm._v(" "),
+            _c("p", [_vm._v("Projects Completed")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "icon" }, [
+            _c("i", { staticClass: "ion ion-pie-graph" })
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
+            _vm._v("More info "),
+            _c("i", { staticClass: "fa fa-arrow-circle-right" })
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header border-transparent" }, [
+      _c("h3", { staticClass: "card-title" }, [_vm._v("Latest Payments")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-tool",
+            attrs: { type: "button", "data-widget": "collapse" }
+          },
+          [_c("i", { staticClass: "fa fa-minus" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-tool",
+            attrs: { type: "button", "data-widget": "remove" }
+          },
+          [_c("i", { staticClass: "fa fa-times" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Pament ID")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Amount")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("User")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Popularity")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("span", { staticClass: "badge badge-success" }, [_vm._v("Shipped")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c(
+        "div",
+        {
+          staticClass: "sparkbar",
+          attrs: { "data-color": "#00a65a", "data-height": "20" }
+        },
+        [
+          _c("canvas", {
+            staticStyle: {
+              display: "inline-block",
+              width: "34px",
+              height: "20px",
+              "vertical-align": "top"
+            },
+            attrs: { width: "34", height: "20" }
+          })
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-footer clearfix" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-sm btn-info float-left",
+          attrs: { href: "javascript:void(0)" }
+        },
+        [_vm._v("Place New Order")]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-sm btn-secondary float-right",
+          attrs: { href: "javascript:void(0)" }
+        },
+        [_vm._v("View All\n                            Orders")]
+      )
     ])
   }
 ]
@@ -56799,6 +57251,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Chamaa/ChamaaDetail.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/Chamaa/ChamaaDetail.vue ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ChamaaDetail_vue_vue_type_template_id_f21531f6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ChamaaDetail.vue?vue&type=template&id=f21531f6& */ "./resources/js/components/Chamaa/ChamaaDetail.vue?vue&type=template&id=f21531f6&");
+/* harmony import */ var _ChamaaDetail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChamaaDetail.vue?vue&type=script&lang=js& */ "./resources/js/components/Chamaa/ChamaaDetail.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ChamaaDetail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ChamaaDetail_vue_vue_type_template_id_f21531f6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ChamaaDetail_vue_vue_type_template_id_f21531f6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Chamaa/ChamaaDetail.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Chamaa/ChamaaDetail.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/Chamaa/ChamaaDetail.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChamaaDetail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ChamaaDetail.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Chamaa/ChamaaDetail.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChamaaDetail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Chamaa/ChamaaDetail.vue?vue&type=template&id=f21531f6&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/Chamaa/ChamaaDetail.vue?vue&type=template&id=f21531f6& ***!
+  \****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChamaaDetail_vue_vue_type_template_id_f21531f6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ChamaaDetail.vue?vue&type=template&id=f21531f6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Chamaa/ChamaaDetail.vue?vue&type=template&id=f21531f6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChamaaDetail_vue_vue_type_template_id_f21531f6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChamaaDetail_vue_vue_type_template_id_f21531f6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/routes.js":
 /*!********************************!*\
   !*** ./resources/js/routes.js ***!
@@ -56809,10 +57330,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Chamaa_Chamaa__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Chamaa/Chamaa */ "./resources/js/components/Chamaa/Chamaa.vue");
+/* harmony import */ var _components_Chamaa_ChamaaDetail__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Chamaa/ChamaaDetail */ "./resources/js/components/Chamaa/ChamaaDetail.vue");
+
 
 var routes = [{
   path: '/chamaa',
   component: _components_Chamaa_Chamaa__WEBPACK_IMPORTED_MODULE_0__["default"]
+}, {
+  path: '/chamaa-view/:id',
+  name: 'chamaa-view',
+  component: _components_Chamaa_ChamaaDetail__WEBPACK_IMPORTED_MODULE_1__["default"],
+  props: true
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);
 
@@ -56837,15 +57365,25 @@ var baseURL = "http://127.0.0.1:8000/api";
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
     all_chamas: [],
+    all_payments: [],
     chamaa_created_status: []
   },
   mutations: {
+    /*----------------------
+      ------chamaa -------
+    /*---------------------*/
     SET_ALL_CHAMAS: function SET_ALL_CHAMAS(state, payload) {
       return state.all_chamas = payload;
     },
     SET_CHAMAA_CREATE_RESPONSE: function SET_CHAMAA_CREATE_RESPONSE(state, payload) {
-      state.chamaa_created_status = payload;
-      return;
+      return state.chamaa_created_status = payload;
+    },
+
+    /*----------------------
+      ------payments -------
+    /*---------------------*/
+    SET_ALL_PAYMENTS: function SET_ALL_PAYMENTS(state, payload) {
+      return state.all_payments = payload;
     }
   },
   actions: {
@@ -56862,25 +57400,54 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     save_chamas: function save_chamas(context, payload) {
       axios.post(baseURL + '/chamaa', payload).then(function (response) {
         context.commit("SET_ALL_CHAMAS", response.data);
-        toast.fire({
-          type: 'success',
-          title: 'Chamaa Created successfully'
-        });
 
         if (response.status == 200) {
           context.commit("SET_CHAMAA_CREATE_RESPONSE", 1);
+          toast.fire({
+            type: 'success',
+            title: 'Chamaa Created successfully'
+          });
+        } else {
+          context.commit("SET_CHAMAA_CREATE_RESPONSE", 0);
+          toast.fire({
+            type: 'error',
+            title: 'Chamaa Created successfully'
+          });
         }
 
         return response;
       });
+    },
+
+    /**payments*/
+    get_payments: function get_payments(context, payload) {
+      axios.get(baseURL + "/payment/chamaa/" + payload).then(function (response) {
+        console.log(response);
+        context.commit("SET_ALL_PAYMENTS", response.data);
+      }).catch(function (error) {
+        toast.fire({
+          type: 'error',
+          title: 'Failed to get payments'
+        });
+      });
     }
   },
   getters: {
+    /*----------------------
+      ------chamaa -------
+    /*---------------------*/
     ALL_CHAMAS: function ALL_CHAMAS(state) {
       return state.all_chamas;
     },
     CHAMAA_CREATION_RESPONSE: function CHAMAA_CREATION_RESPONSE(state) {
       return state.chamaa_created_status;
+    },
+
+    /*----------------------
+      ------payments -------
+    /*---------------------*/
+    ALL_PAYMENTS: function ALL_PAYMENTS(state) {
+      return state.all_payments;
     }
   }
 });

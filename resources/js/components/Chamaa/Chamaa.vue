@@ -28,6 +28,8 @@
                                         <span class="progress-description">
                                           30% Increase in 30 Days
                                         </span>
+                                        <a class="btn" @click="view_chamaa(chama.id)">View<i
+                                            class=" fas fa-tachometer-alt"></i></a>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -117,6 +119,9 @@
             },
             create_chamaa() {
                 this.$store.dispatch("save_chamas", this.form);
+            }, view_chamaa(payload) {
+
+                this.$router.push({name: 'chamaa-view',path:`chamaa-view/${payload}`, params: {'chamaa_id': payload}})
             }
         },
         computed: {

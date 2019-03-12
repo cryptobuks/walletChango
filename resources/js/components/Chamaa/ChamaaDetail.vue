@@ -89,7 +89,7 @@
                                         <th>Pament ID</th>
                                         <th>Amount</th>
                                         <th>User</th>
-                                        <th>Popularity</th>
+                                        <th>Project</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -97,12 +97,9 @@
                                         <td><a href="pages/examples/invoice.html">{{payments.payment_reference}}</a>
                                         </td>
                                         <td>{{payments.payment_amount}}</td>
-                                        <td><span class="badge badge-success">Shipped</span></td>
+                                        <td><span class="badge ">{{payments.user.name}}</span></td>
                                         <td>
-                                            <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                <canvas width="34" height="20"
-                                                        style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
-                                            </div>
+                                           {{payments.project.project_name}}
                                         </td>
                                     </tr>
                                     </tbody>
@@ -112,9 +109,9 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer clearfix">
-                            <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
+                            <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Paymnet</a>
                             <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All
-                                Orders</a>
+                                Payments</a>
                         </div>
                         <!-- /.card-footer -->
                     </div>

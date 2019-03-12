@@ -29,3 +29,9 @@ Route::apiResources(['payment' => 'API\PaymentsController']);
 Route::get('payment/chamaa/{chamaa}' , 'API\PaymentsController@show');
 
 
+
+
+/*--------------------------------------------------------*/
+//            Proejcts routes
+/*--------------------------------------------------------*/
+Route::apiResources(['project' => 'API\ProjectsController']);

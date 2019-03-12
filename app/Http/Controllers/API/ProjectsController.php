@@ -3,19 +3,19 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Payments_;
+use App\Projects;
 use Illuminate\Http\Request;
 
-class PaymentsController extends Controller
+class ProjectsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return Payments_[]|\Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return Payments_::with(['user'])->get();
+        return Projects::with('user')->get();
     }
 
     /**
@@ -36,7 +36,7 @@ class PaymentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -47,7 +47,10 @@ class PaymentsController extends Controller
      */
     public function show($id)
     {
-        return Payments_::with(['user','project'])->where('chamaa_id', $id)->take(5)->get() ;
+        return Projects::with('user')->where('id', $id)->get();
+//        return Projects::with('user')->join('tbl_payments', 'tbl_projects.id', '=', 'tbl_payments.project_id')
+//            ->where('tbl_projects.id', $id)->get();
+
     }
 
     /**

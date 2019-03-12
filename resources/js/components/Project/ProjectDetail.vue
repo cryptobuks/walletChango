@@ -125,7 +125,7 @@
 <script>
 
     export default {
-        props: ['chamaa_id'],
+        props: ['project_id'],
         data() {
             return {
                 all_payments: [],
@@ -135,7 +135,7 @@
             console.log('Component mounted.')
         }, methods: {
             fetch_payments() {
-                this.$store.dispatch('get_payments', this.chamaa_id)
+                this.$store.dispatch('get_payments', this.project_id)
             }
         },
         computed: {

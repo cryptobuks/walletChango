@@ -19,6 +19,15 @@ use Illuminate\Support\Str;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
+        'name' => "Abednego Kilonzo",
+        'email' => "abedxh@gmail.com",
+        'email_verified_at' => now(),
+        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'remember_token' => Str::random(10),
+    ];
+});
+$factory->define(User::class, function (Faker $faker) {
+    return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
@@ -29,19 +38,34 @@ $factory->define(User::class, function (Faker $faker) {
 
 $factory->define(Chamaa::class, function (Faker $faker) {
     return [
-        'chamaa_name' => $faker->name,
+        'chamaa_name' => $faker->company,
         'created_at' => now(),
         'updated_at' => now(),
-        'chamaa_uuid' => $faker->name,
+        'chamaa_uuid' => $faker->uuid,
     ];
 });
+$factory->define(\App\Projects::class, function (Faker $faker) {
+    return [
+        'project_name' => $faker->name,
+        'project_description' => $faker->realText(),
+        'target_group_number' => $faker->numberBetween($min = 1, $max = 20),
+        'project_target_amount' => $faker->numberBetween(5, 1000),
+        'members_subscribed' => $faker->numberBetween(5, 15),
+        'project_initiated_by' => App\User::all()->random()->id,
+        'amount_collected' => $faker->numberBetween(4, 100),
+        'group_id' => App\Chamaa::all()->random()->id,
+        'updated_at' => now(),
+        'created_at' => now(),
+    ];
+});
+
 $factory->define(Payments_::class, function (Faker $faker) {
     return [
         'payment_reference' => $faker->name,
         'payment_amount' => $faker->randomNumber(),
-        'user_id' => $faker->randomNumber(),
-        'project_id' => $faker->randomNumber(),
-        'chamaa_id' =>App\Chamaa::all()->random()->id,
+        'user_id' => App\User::all()->random()->id,
+        'project_id' => App\Projects::all()->random()->id,
+        'chamaa_id' => App\Chamaa::all()->random()->id,
         'updated_at' => now(),
         'created_at' => now(),
     ];

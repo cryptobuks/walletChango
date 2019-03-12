@@ -78,9 +78,75 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt blue"></i>
+                            <i class="nav-icon fas fa-users blue"></i>
                             <p>
-                                Chamaa <i class="fa fa-angle-left right"></i>
+                                Groups <i class="fa fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview" style="display: none;">
+
+                            <li class="nav-item">
+                                <router-link to="/groups" class="nav-link">
+                                    <i class="fas fa-circle-o nav-icon"></i>
+
+                                    <p>
+                                        Groups
+                                        <!--<span class="right badge badge-danger">New</span>-->
+                                    </p>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../UI/buttons.html" class="nav-link">
+                                    <i class="fas fa-circle-o nav-icon"></i>
+                                    <p>Buttons</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../UI/sliders.html" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>Sliders</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-envelope-square orange"></i>
+                            <p>
+                                Projects <i class="fa fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview" style="display: none;">
+
+                            <li class="nav-item">
+                                <router-link to="/projects" class="nav-link">
+                                    <i class="fas fa-circle-o nav-icon"></i>
+
+                                    <p>
+                                        Projects
+                                        <!--<span class="right badge badge-danger">New</span>-->
+                                    </p>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../UI/buttons.html" class="nav-link">
+                                    <i class="fas fa-circle-o nav-icon"></i>
+                                    <p>Buttons</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../UI/sliders.html" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>Sliders</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-periscope red"></i>
+                            <p>
+                                Transactions <i class="fa fa-angle-left right"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview" style="display: none;">
@@ -90,7 +156,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <i class="fas fa-circle-o nav-icon"></i>
 
                                     <p>
-                                        Chamaas
+                                        Projects
                                         <!--<span class="right badge badge-danger">New</span>-->
                                     </p>
                                 </router-link>

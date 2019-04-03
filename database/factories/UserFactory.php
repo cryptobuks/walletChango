@@ -1,6 +1,6 @@
 <?php
 
-use App\Chamaa;
+use App\Group;
 use App\Payments_;
 use App\User;
 use Faker\Generator as Faker;
@@ -36,12 +36,12 @@ $factory->define(User::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(Chamaa::class, function (Faker $faker) {
+$factory->define(Group::class, function (Faker $faker) {
     return [
-        'chamaa_name' => $faker->company,
+        'group_name' => $faker->company,
         'created_at' => now(),
         'updated_at' => now(),
-        'chamaa_uuid' => $faker->uuid,
+        'group_uuid' => $faker->uuid,
     ];
 });
 $factory->define(\App\Projects::class, function (Faker $faker) {
@@ -53,7 +53,7 @@ $factory->define(\App\Projects::class, function (Faker $faker) {
         'members_subscribed' => $faker->numberBetween(5, 15),
         'project_initiated_by' => App\User::all()->random()->id,
         'amount_collected' => $faker->numberBetween(4, 100),
-        'group_id' => App\Chamaa::all()->random()->id,
+        'group_id' => App\Group::all()->random()->id,
         'updated_at' => now(),
         'created_at' => now(),
     ];
@@ -65,7 +65,7 @@ $factory->define(Payments_::class, function (Faker $faker) {
         'payment_amount' => $faker->randomNumber(),
         'user_id' => App\User::all()->random()->id,
         'project_id' => App\Projects::all()->random()->id,
-        'chamaa_id' => App\Chamaa::all()->random()->id,
+        'group_id' => App\Group::all()->random()->id,
         'updated_at' => now(),
         'created_at' => now(),
     ];

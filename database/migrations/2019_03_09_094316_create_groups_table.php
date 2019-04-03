@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChamaasTable extends Migration
+class CreateGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateChamaasTable extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_chamaa', function (Blueprint $table) {
+        Schema::create('tbl_group', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string("chamaa_name");
+            $table->string("group_name");
             $table->string("members_count")->nullable()->default(0);
-            $table->string("chamaa_uuid");
+            $table->string("group_uuid");
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateChamaasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_chamaa');
+        Schema::dropIfExists('tbl_group');
     }
 }

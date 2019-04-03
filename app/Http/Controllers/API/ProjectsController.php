@@ -15,7 +15,7 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        return Projects::with('user')->get();
+        return Projects::with('user','group')->get()->take(15);
     }
 
     /**
@@ -47,7 +47,7 @@ class ProjectsController extends Controller
      */
     public function show($id)
     {
-        return Projects::with('user')->where('id', $id)->get();
+        return Projects::with('user')->where('id', $id)->first();
 //        return Projects::with('user')->join('tbl_payments', 'tbl_projects.id', '=', 'tbl_payments.project_id')
 //            ->where('tbl_projects.id', $id)->get();
 

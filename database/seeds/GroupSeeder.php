@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ChamaaSeeder extends Seeder
+class GroupSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,7 @@ class ChamaaSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Chamaa::class, 5)->create();
+        factory(App\Group::class, 5)->create();
 
     }
 }

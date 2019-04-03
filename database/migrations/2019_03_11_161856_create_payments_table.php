@@ -19,7 +19,7 @@ class CreatePaymentsTable extends Migration
             $table->string("payment_amount");
             $table->string("user_id");
             $table->string("project_id");
-            $table->string("chamaa_id");
+            $table->string("group_id");
             $table->timestamps();
         });
     }

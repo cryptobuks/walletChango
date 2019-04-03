@@ -1,12 +1,12 @@
-import Chamaa from './components/Chamaa/Chamaa'
-import ChamaaDetail from "./components/Chamaa/ChamaaDetail";
+import Group from './components/Group/Group'
+import GroupDetail from "./components/Group/GroupDetail";
 import ProjectDetail from "./components/Project/ProjectDetail";
 import Projects from "./components/Project/Projects";
 
 
 const routes = [
-    {path: '/groups', component: Chamaa},
-    {path: '/chamaa-view/:id', name: 'chamaa-view', component: ChamaaDetail, props: true},
+    {path: '/groups', component: Group},
+    {path: '/group-view/:id', name: 'group-view', component: GroupDetail, props: true},
 
 
     {path: '/projects', component: Projects},

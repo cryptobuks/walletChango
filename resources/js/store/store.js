@@ -6,8 +6,8 @@ const baseURL = "http://127.0.0.1:8000/api";
 
 const store = new Vuex.Store({
     state: {
-        all_chamas: [],
-        chamaa_created_status: [],
+        all_groups: [],
+        group_created_status: [],
 
 
         all_payments: [],
@@ -18,13 +18,13 @@ const store = new Vuex.Store({
     },
     mutations: {
         /*----------------------
-          ------chamaa -------
+          ------group -------
         /*---------------------*/
-        SET_ALL_CHAMAS: (state, payload) => {
-            return state.all_chamas = payload;
+        SET_ALL_GROUPS: (state, payload) => {
+            return state.all_groups = payload;
 
-        }, SET_CHAMAA_CREATE_RESPONSE: (state, payload) => {
-            return state.chamaa_created_status = payload
+        }, SET_GROUP_CREATE_RESPONSE: (state, payload) => {
+            return state.group_created_status = payload
         },
         /*----------------------
           ------payments -------
@@ -44,30 +44,30 @@ const store = new Vuex.Store({
         },
     },
     actions: {
-        get_chamas: (context) => {
+        get_groups: (context) => {
             let response_data = {};
-            axios.get(baseURL + '/chamaa').then(response => {
-                context.commit("SET_ALL_CHAMAS", response.data);
+            axios.get(baseURL + '/group').then(response => {
+                context.commit("SET_ALL_GROUPS", response.data);
                 response_data = response.data
             }).catch(error => {
                 return error;
             })
             return response_data
-        }, save_chamas: (context, payload) => {
-            axios.post(baseURL + '/chamaa', payload).then(response => {
-                context.commit("SET_ALL_CHAMAS", response.data);
+        }, save_GROUPs: (context, payload) => {
+            axios.post(baseURL + '/group', payload).then(response => {
+                context.commit("SET_ALL_GROUPS", response.data);
 
                 if (response.status == 200) {
-                    context.commit("SET_CHAMAA_CREATE_RESPONSE", 1);
+                    context.commit("SET_GROUPS_CREATE_RESPONSE", 1);
                     toast.fire({
                         type: 'success',
-                        title: 'Chamaa Created successfully'
+                        title: 'Group Created successfully'
                     })
                 } else {
-                    context.commit("SET_CHAMAA_CREATE_RESPONSE", 0);
+                    context.commit("SET_GROUP_CREATE_RESPONSE", 0);
                     toast.fire({
                         type: 'error',
-                        title: 'Chamaa Created successfully'
+                        title: 'Group Created successfully'
                     })
                 }
                 return response;
@@ -80,7 +80,7 @@ const store = new Vuex.Store({
         /*------------------------------------------------*/
 
         get_payments(context, payload) {
-            axios.get(baseURL + "/payment/chamaa/" + payload).then(response => {
+            axios.get(baseURL + "/payment/group/" + payload).then(response => {
                 console.log(response)
 
                 context.commit("SET_ALL_PAYMENTS", response.data)
@@ -119,16 +119,17 @@ const store = new Vuex.Store({
                 context.commit("SET_ALL_PROJECTS", response.data);
 
                 if (response.status == 200) {
-                    context.commit("SET_PROJECT_CREATE_RESPONSE", 1);
+                    context.commit("SET_PROJECTS_CREATE_RESPONSE", 1);
                     toast.fire({
                         type: 'success',
                         title: 'Project Created successfully'
                     })
                 } else {
-                    context.commit("SET_PROJECT_CREATE_RESPONSE", 0);
+                    console.log(response)
+                    context.commit("SET_PROJECTS_CREATE_RESPONSE", 0);
                     toast.fire({
                         type: 'error',
-                        title: 'Project Created successfully'
+                        title: 'Project Not Created Please Try again '
                     })
                 }
                 return response;
@@ -139,10 +140,10 @@ const store = new Vuex.Store({
     },
     getters: {
         /*----------------------
-          ------chamaa -------
+          ------group -------
         /*---------------------*/
-        ALL_CHAMAS: state => state.all_chamas,
-        CHAMAA_CREATION_RESPONSE: state => state.chamaa_created_status,
+        ALL_GROUPS: state => state.all_groups,
+        GROUP_CREATION_RESPONSE: state => state.group_created_status,
 
         /*----------------------
           ------payments -------

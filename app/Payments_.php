@@ -9,7 +9,7 @@ class Payments_ extends Model
     protected $table = "tbl_payments";
 
     protected $fillable = [
-        'chamaa_name', 'members_count', 'chamaa_uuid'
+        'group_name', 'members_count', 'group_uuid'
     ];
 
     public function user()

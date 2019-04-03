@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Chamaa;
+use App\Group;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -15,7 +15,7 @@ class ChamaaController extends Controller
      */
     public function index()
     {
-        return Chamaa::get();
+        return Group::get();
     }
 
     /**
@@ -39,15 +39,15 @@ class ChamaaController extends Controller
     {
 
         $this->validate($request, [
-            'chamaa_name' => 'required',
+            'group_name' => 'required',
             'members_count' => 'required|integer|max:191',
         ]);
-        $new_chamaa = new Chamaa();
-        $new_chamaa->chamaa_name = $request->all()['chamaa_name'];
-        $new_chamaa->members_count = $request->all()['members_count'];
-        $new_chamaa->chamaa_uuid = $request->all()['chamaa_uuid'];
-        $new_chamaa->save();
-        return response(Chamaa::all());
+        $new_group = new Group();
+        $new_group->group_name = $request->all()['group_name'];
+        $new_group->members_count = $request->all()['members_count'];
+        $new_group->group_uuid = $request->all()['group_uuid'];
+        $new_group->save();
+        return response(Group::all());
     }
 
     /**

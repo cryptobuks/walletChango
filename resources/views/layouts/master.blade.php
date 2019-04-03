@@ -152,7 +152,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <ul class="nav nav-treeview" style="display: none;">
 
                             <li class="nav-item">
-                                <router-link to="/chamaa" class="nav-link">
+                                <router-link to="/group" class="nav-link">
                                     <i class="fas fa-circle-o nav-icon"></i>
 
                                     <p>

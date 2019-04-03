@@ -47,7 +47,7 @@ class PaymentsController extends Controller
      */
     public function show($id)
     {
-        return Payments_::with(['user','project'])->where('chamaa_id', $id)->take(5)->get() ;
+        return Payments_::with(['user','project'])->where('group_id', $id)->take(5)->get() ;
     }
 
     /**

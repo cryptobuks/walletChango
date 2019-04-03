@@ -14,22 +14,28 @@
 
                     <div class="card-body">
                         <div class="row">
-                            <div v-for="project in all_projects" class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box bg-info">
-                                    <span class="info-box-icon"><i class="fas fa- fa-3x orange"></i></span>
+                            <div v-for="project in all_projects" class="col-md-6 col-sm-6 col-12">
+                                <div class="info-box bg-primary">
+                                    <span class="info-box-icon"><i class="fas fa-weight fa-3x white"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text"><b>Projects Name:</b>{{project.project_name}}</span>
-                                        <span class="info-box-number"><b>Subscribers:</b> {{project.members_subscribed}} </span>
-
+                                        <div class="row">
+                                            <span class="info-box-text col-sm-4"><b>Projects Name:</b></span>
+                                            <h3 class="col-sm-8">{{project.project_name}}</h3>
+                                            <span class="info-box-number col-sm-4"><b>Amount Raised:
+                                            </b></span><h4 class="col-sm-8"> Kshs . {{project.amount_collected}} of {{project.project_target_amount}} </h4>
+                                        </div>
                                         <div class="progress">
                                             <div class="progress-bar" :style="{width: project.members_count+'%'}"></div>
                                         </div>
                                         <span class="progress-description">
-                                          30% Increase in 30 Days
+                                            {{(project.amount_collected/project.project_target_amount)*100}}%
+                                            <!--30% Increase in 30 Days-->
                                         </span>
-                                        <a class="btn" @click="view_project(project.id)">View<i
-                                            class=" fas fa-tachometer-alt"></i></a>
+                                        <div class="timeline-footer">
+
+                                        <a class="btn btn-info btn-xs col-sm-10 " @click="view_project(project.id)">View</a>
+                                        </div>
                                     </div>
                                     <!-- /.info-box-content -->
                                 </div>
@@ -122,7 +128,11 @@
                 this.$store.dispatch("save_projects", this.form);
             }, view_project(payload) {
 
-                this.$router.push({name: 'project-view',path:`project-view/${payload}`, params: {'project_id': payload}})
+                this.$router.push({
+                    name: 'project-view',
+                    path: `project-view/${payload}`,
+                    params: {'project_id': payload}
+                })
             }
         },
         computed: {

@@ -25,4 +25,8 @@ class Projects extends Model
     {
         return $this->hasMany('App\Payments_','id','project_id');
     }
+    public function group()
+    {
+        return $this->belongsTo('App\Group','group_id','id');
+    }
 }

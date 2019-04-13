@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::apiResources(['group' => 'API\ChamaaController']);
+Route::apiResources(['group' => 'API\GroupController']);
 
 
 
@@ -32,6 +32,19 @@ Route::get('payment/group/{group}' , 'API\PaymentsController@show');
 
 
 /*--------------------------------------------------------*/
-//            Proejcts routes
+//            Projects routes
 /*--------------------------------------------------------*/
 Route::apiResources(['project' => 'API\ProjectsController']);
+
+
+/*--------------------------------------------------------*/
+//            Wallet routes
+/*--------------------------------------------------------*/
+Route::apiResources(['wallet' => 'API\WalletController']);
+
+
+/*--------------------------------------------------------*/
+//            User routes
+/*--------------------------------------------------------*/
+Route::apiResources(['user' => 'API\UserController']);
+Route::post('user/login' , 'API\UserController@login');

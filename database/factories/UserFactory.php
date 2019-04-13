@@ -2,7 +2,9 @@
 
 use App\Group;
 use App\Payments_;
+use App\Projects;
 use App\User;
+use App\wallet;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
@@ -36,6 +38,15 @@ $factory->define(User::class, function (Faker $faker) {
     ];
 });
 
+$factory->define(Wallet::class, function (Faker $faker) {
+    return [
+        'wallet_name' => $faker->company,
+        'wallet_amount' => 0,
+        'created_at' => now(),
+        'updated_at' => now(),
+    ];
+});
+
 $factory->define(Group::class, function (Faker $faker) {
     return [
         'group_name' => $faker->company,
@@ -44,7 +55,7 @@ $factory->define(Group::class, function (Faker $faker) {
         'group_uuid' => $faker->uuid,
     ];
 });
-$factory->define(\App\Projects::class, function (Faker $faker) {
+$factory->define(Projects::class, function (Faker $faker) {
     return [
         'project_name' => $faker->name,
         'project_description' => $faker->realText(),

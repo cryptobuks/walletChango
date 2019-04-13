@@ -144,7 +144,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </li>
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-periscope red"></i>
+                            <i class="nav-icon fas fa-wallet orange"></i>
+                            <p>
+                                Wallets <i class="fa fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview" style="display: none;">
+
+                            <li class="nav-item">
+                                <router-link to="/wallets" class="nav-link">
+                                    <i class="fas fa-circle-o nav-icon"></i>
+
+                                    <p>
+                                        Wallets
+                                        <!--<span class="right badge badge-danger">New</span>-->
+                                    </p>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-list red"></i>
                             <p>
                                 Transactions <i class="fa fa-angle-left right"></i>
                             </p>
@@ -156,22 +177,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <i class="fas fa-circle-o nav-icon"></i>
 
                                     <p>
-                                        Projects
+                                        Transactions
                                         <!--<span class="right badge badge-danger">New</span>-->
                                     </p>
                                 </router-link>
                             </li>
-                            <li class="nav-item">
-                                <a href="../UI/buttons.html" class="nav-link">
-                                    <i class="fas fa-circle-o nav-icon"></i>
-                                    <p>Buttons</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="../UI/sliders.html" class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>Sliders</p>
-                                </a>
                             </li>
                         </ul>
                     </li>
@@ -208,7 +218,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             Anything you want
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2014-2018 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2019- <?php echo date('Y')?> <a href="#x">Wallet Chango</a>.</strong> All rights reserved.
     </footer>
 </div>
 <!-- ./wrapper -->

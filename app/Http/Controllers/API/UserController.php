@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Group;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
-class ChamaaController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class ChamaaController extends Controller
      */
     public function index()
     {
-        return Group::get();
+        return User::get();
     }
 
     /**
@@ -31,29 +32,52 @@ class ChamaaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function login(Request $request)
+    {
+
+        $this->validate($request, [
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        $user = User::where('email', $request->email)->get();
+        if (count($user) > 0) {
+            if (Hash::check($request->password, $user->first()->password)) {
+                $walletUser = $user->first();
+                $walletUser['status'] = "success";
+            } else {
+                $walletUser['status'] = "error";
+                $walletUser['message'] = "password and email combination is wronf";
+            }
+        } else {
+            $walletUser['status'] = "error";
+            $walletUser['message'] = "password and email combination is wronf";
+
+        }
+        return $walletUser;
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
 
-        $this->validate($request, [
-            'group_name' => 'required',
-            'members_count' => 'required|integer|max:191',
-        ]);
-        $new_group = new Group();
-        $new_group->group_name = $request->all()['group_name'];
-        $new_group->members_count = $request->all()['members_count'];
-        $new_group->group_uuid = $request->all()['group_uuid'];
-        $new_group->save();
-        return response(Group::all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -64,7 +88,7 @@ class ChamaaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -75,8 +99,8 @@ class ChamaaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -87,7 +111,7 @@ class ChamaaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

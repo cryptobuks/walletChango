@@ -15,6 +15,9 @@ const store = new Vuex.Store({
 
         all_projects: [],
         project_created_status: [],
+
+        all_wallets: [],
+        wallet_created_status: [],
     },
     mutations: {
         /*----------------------
@@ -41,6 +44,15 @@ const store = new Vuex.Store({
 
         }, SET_PROJECTS_CREATE_RESPONSE: (state, payload) => {
             return state.project_created_status = payload
+        },   /*----------------------
+         ------wallet -------
+       /*---------------------*/
+        SET_ALL_WALLETS: (state, payload) => {
+            console.log(payload)
+            return state.all_wallets = payload;
+
+        }, WALLETS_CREATE_RESPONSE: (state, payload) => {
+            return state.wallet_created_status = payload
         },
     },
     actions: {
@@ -106,7 +118,7 @@ const store = new Vuex.Store({
             return response_data
         }, get_project: (context, payload) => {
             let response_data = {};
-            axios.get(baseURL + '/project/'+payload).then(response => {
+            axios.get(baseURL + '/project/' + payload).then(response => {
                 console.log(response.data)
                 context.commit("SET_ALL_PROJECTS", response.data);
                 response_data = response.data
@@ -135,6 +147,49 @@ const store = new Vuex.Store({
                 return response;
 
             })
+        },/*------------------------------------------------*/
+        /*                      wallets                  */
+        /*------------------------------------------------*/
+        get_wallets: (context) => {
+            let response_data = {};
+            axios.get(baseURL + '/wallet').then(response => {
+                context.commit("SET_ALL_WALLETS", response.data);
+                response_data = response.data
+            }).catch(error => {
+                return error;
+            })
+            return response_data
+        }, get_wallet: (context, payload) => {
+            let response_data = {};
+            axios.get(baseURL + '/wallet/' + payload).then(response => {
+                console.log(response.data)
+                context.commit("SET_ALL_WALLETS", response.data);
+                response_data = response.data
+            }).catch(error => {
+                return error;
+            })
+            return response_data
+        }, save_wallets: (context, payload) => {
+            axios.post(baseURL + '/wallet/', payload).then(response => {
+                context.commit("SET_ALL_WALLETS", response.data);
+
+                if (response.status == 200) {
+                    context.commit("SET_WALLETS_CREATE_RESPONSE", 1);
+                    toast.fire({
+                        type: 'success',
+                        title: 'Wallet Created successfully'
+                    })
+                } else {
+                    console.log(response)
+                    context.commit("SET_WALLETS_CREATE_RESPONSE", 0);
+                    toast.fire({
+                        type: 'error',
+                        title: 'Wallet Not Created Please Try again '
+                    })
+                }
+                return response;
+
+            })
         },
 
     },
@@ -154,7 +209,12 @@ const store = new Vuex.Store({
        ------payments -------
      /*---------------------*/
         ALL_PROJECTS: state => state.all_projects,
-        PROJECTS_CREATION_RESPONSE: state => state.project_created_status,
+        PROJECTS_CREATION_RESPONSE: state => state.project_create,
+        /*----------------------
+       ------wallets -------
+     /*---------------------*/
+        ALL_WALLETS: state => state.all_wallets,
+        WALLETS_CREATION_RESPONSE: state => state.wallet_created_status,
 
     }
 

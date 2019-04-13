@@ -1,5 +1,6 @@
 <?php
 
+use App\wallet;
 use Illuminate\Database\Seeder;
 
 class UsersSeeder extends Seeder
@@ -11,9 +12,10 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, 20)->create();
+        factory(App\User::class, 20)->create()->each(function ($user) {
+            $user->wallet()->save(factory(Wallet::class)->make());
+        });
     }
-    public function payments(){
-        return $this->hasMany();
-    }
+
+
 }

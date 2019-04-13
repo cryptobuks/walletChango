@@ -7,7 +7,7 @@
 
                         <button class="btn btn-success right"
                                 @click="open_my_modal">
-                            New project
+                            New Project
                             <i class="nav-icon fas fa-plus-square "></i>
                         </button>
                     </div>

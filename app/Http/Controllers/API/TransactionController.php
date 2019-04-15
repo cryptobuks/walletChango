@@ -49,7 +49,7 @@ class TransactionController extends Controller
         $transaction['transaction_type'] = $request->transaction_type;
         $transaction->save();
 
-return $transaction;
+        return $transaction;
 
 
     }

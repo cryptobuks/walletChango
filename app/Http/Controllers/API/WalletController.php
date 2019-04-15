@@ -99,6 +99,7 @@ class WalletController extends Controller
 
     public function deposit_amount(Request $request)
     {
+
         $this->validate($request, [
             'user_id' => 'required|integer',
             'amount' => 'required',

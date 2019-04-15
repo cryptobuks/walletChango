@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Wallet;
+use App\Transactions;
 use Illuminate\Http\Request;
 
-class WalletController extends Controller
+class TransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class WalletController extends Controller
      */
     public function index()
     {
-        return Wallet::get();
+        //
     }
 
     /**
@@ -25,10 +25,10 @@ class WalletController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
-    /**                String wallet_amount = getString(R.string.your_wallet_amount_is);
+    /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
@@ -36,18 +36,22 @@ class WalletController extends Controller
      */
     public function store(Request $request)
     {
-
         $this->validate($request, [
             'user_id' => 'required|integer',
-            'wallet_name' => 'required',
-            'wallet_amount' => 'required|integer',
+            'amount' => 'required',
+            'wallet_id' => 'required|integer',
+            'transaction_type' => 'required|integer',
         ]);
-        $new_group = new Wallet();
-        $new_group->wallet_name = $request->all()['wallet_name'];
-        $new_group->user_id = $request->all()['user_id'];
-        $new_group->wallet_amount = $request->all()['wallet_amount'];
-        $new_group->save();
-        return response(wallet::all());
+        $transaction = new Transactions();
+        $transaction['user_id'] = $request->user_id;
+        $transaction['wallet_id'] = $request->wallet_id;
+        $transaction['amount'] = $request->amount;
+        $transaction['transaction_type'] = $request->transaction_type;
+        $transaction->save();
+
+return $transaction;
+
+
     }
 
     /**
@@ -58,8 +62,7 @@ class WalletController extends Controller
      */
     public function show($id)
     {
-        return Wallet::with('user')->where('user_id', $id)->first();
-
+        //
     }
 
     /**
@@ -94,22 +97,5 @@ class WalletController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-
-    public function deposit_amount(Request $request)
-    {
-        $this->validate($request, [
-            'user_id' => 'required|integer',
-            'amount' => 'required',
-            'wallet_id' => 'required|integer',
-            'transaction_type' => 'required|integer',
-        ]);
-        $wallet = Wallet::find($request->wallet_id);
-        $wallet['wallet_amount'] =$wallet->wallet_amount+ $request->amount;
-        $wallet->save();
-
-        $transaction = new TransactionController();
-        return $transaction->store($request);
     }
 }

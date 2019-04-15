@@ -58,7 +58,7 @@ class WalletController extends Controller
      */
     public function show($id)
     {
-        return Wallet::with('user')->where('id', $id)->first();
+        return Wallet::with('user')->where('user_id', $id)->first();
 
     }
 

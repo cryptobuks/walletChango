@@ -11,11 +11,11 @@ class TransactionController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Transactions[]|\Illuminate\Database\Eloquent\Collection
      */
     public function index()
     {
-        //
+        return $transactions = Transactions::all();
     }
 
     /**
@@ -62,7 +62,8 @@ class TransactionController extends Controller
      */
     public function show($id)
     {
-        //
+        return $transactions = Transactions::where('id', $id)->get();
+
     }
 
     /**

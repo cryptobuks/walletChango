@@ -49,4 +49,4 @@ Route::post('user/login', 'API\UserController@login');
 /*--------------------------------------------------------*/
 //            Transaction routes
 /*--------------------------------------------------------*/
-Route::apiResources(['transaction' => 'API\UserController']);
+Route::apiResources(['transaction' => 'API\TransactionController']);

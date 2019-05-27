@@ -16,37 +16,46 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::apiResources(['group' => 'API\GroupController']);
+
+Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
+    Route::post('authenticate', 'API\UserController@authenticate')->name('api.authenticate');
+
+});
+
+Route::group(['middleware' => 'api',], function () {
+
+    Route::apiResources(['group' => 'API\GroupController']);
 
 
-/*--------------------------------------------------------*/
+    /*--------------------------------------------------------*/
 //            Payment routes
-/*--------------------------------------------------------*/
-Route::apiResources(['payment' => 'API\PaymentsController']);
-Route::get('payment/group/{group}', 'API\PaymentsController@show');
+    /*--------------------------------------------------------*/
+    Route::apiResources(['payment' => 'API\PaymentsController']);
+    Route::get('payment/group/{group}', 'API\PaymentsController@show');
 
 
-/*--------------------------------------------------------*/
+    /*--------------------------------------------------------*/
 //            Projects routes
-/*--------------------------------------------------------*/
-Route::apiResources(['project' => 'API\ProjectsController']);
+    /*--------------------------------------------------------*/
+    Route::apiResources(['project' => 'API\ProjectsController']);
 
 
-/*--------------------------------------------------------*/
+    /*--------------------------------------------------------*/
 //            Wallet routes
-/*--------------------------------------------------------*/
-Route::apiResources(['wallet' => 'API\WalletController']);
-Route::post('user/deposit', 'API\WalletController@deposit_amount');
+    /*--------------------------------------------------------*/
+    Route::apiResources(['wallet' => 'API\WalletController']);
+    Route::post('user/deposit', 'API\WalletController@deposit_amount');
 
 
-/*--------------------------------------------------------*/
+    /*--------------------------------------------------------*/
 //            User routes
-/*--------------------------------------------------------*/
-Route::apiResources(['user' => 'API\UserController']);
-Route::post('user/login', 'API\UserController@login');
+    /*--------------------------------------------------------*/
+    Route::apiResources(['user' => 'API\UserController']);
+    Route::post('user/login', 'API\UserController@login');
 
 
-/*--------------------------------------------------------*/
+    /*--------------------------------------------------------*/
 //            Transaction routes
-/*--------------------------------------------------------*/
-Route::apiResources(['transaction' => 'API\TransactionController']);
+    /*--------------------------------------------------------*/
+    Route::apiResources(['transaction' => 'API\TransactionController']);
+});

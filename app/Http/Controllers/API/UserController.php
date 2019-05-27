@@ -5,10 +5,18 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        Config::set('jwt.user', 'App\User');
+        Config::set('auth.providers.users.model', \App\User::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -28,6 +36,51 @@ class UserController extends Controller
     {
         //
     }
+
+
+    public function authenticate(Request $request)
+    {
+        //Validate fields
+        $validator = Validator::make($request->all(), ['email' => 'required', 'password' => 'required']);
+        if (!$validator->passes()) {
+            return api_response(
+                false,
+                $validator->errors()->all(),
+                '1',
+                'Failed',
+                "Some entries are missing",
+                null
+            );
+
+        } else {
+            //Attempt validation
+
+            $credentials = $request->only(['email', 'password']);
+
+            if (!$token = auth()->attempt($credentials)) {
+
+                return api_response(
+                    false,
+                    ['error' => 'Incorrect credentials'],
+                    0,
+                    "Failed",
+                    'Your password and user name do no match  ',
+                    null
+                );
+            } else {
+                return api_response(
+                    true,
+                    null,
+                    1,
+                    "Success",
+                    'You have successfully logged in ',
+                    ["token" => $token]
+                );
+            }
+
+        }
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -51,11 +104,11 @@ class UserController extends Controller
                 $walletUser['status'] = "success";
             } else {
                 $walletUser['status'] = "error";
-                $walletUser['message'] = "password and email combination is wronf";
+                $walletUser['message'] = "password and email combination is wrong";
             }
         } else {
             $walletUser['status'] = "error";
-            $walletUser['message'] = "password and email combination is wronf";
+            $walletUser['message'] = "password and email combination is wrong";
 
         }
         return $walletUser;

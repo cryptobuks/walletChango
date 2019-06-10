@@ -3,9 +3,9 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card card-default">
-                    <div class="card-header">project
+                    <div class="card-header">Project
 
-                        <button class="btn btn-success right"
+                        <button class="btn btn-success right float-right"
                                 @click="open_my_modal">
                             New Project
                             <i class="nav-icon fas fa-plus-square "></i>
@@ -14,29 +14,78 @@
 
                     <div class="card-body">
                         <div class="row">
-                            <div v-for="project in all_projects" class="col-md-6 col-sm-6 col-12">
-                                <div class="info-box bg-primary">
-                                    <span class="info-box-icon"><i class="fas fa-weight fa-3x white"></i></span>
+                            <div v-for="project in all_projects" class="col-md-4 col-sm-4 ">
+                                <div class="info-box ">
 
-                                    <div class="info-box-content">
-                                        <div class="row">
-                                            <span class="info-box-text col-sm-4"><b>Projects Name:</b></span>
-                                            <h3 class="col-sm-8">{{project.project_name}}</h3>
-                                            <span class="info-box-number col-sm-4"><b>Amount Raised:
-                                            </b></span><h4 class="col-sm-8"> Kshs . {{project.amount_collected}} of {{project.project_target_amount}} </h4>
-                                        </div>
-                                        <div class="progress">
-                                            <div class="progress-bar" :style="{width: project.members_count+'%'}"></div>
-                                        </div>
-                                        <span class="progress-description">
-                                            {{(project.amount_collected/project.project_target_amount)*100}}%
-                                            <!--30% Increase in 30 Days-->
-                                        </span>
-                                        <div class="timeline-footer">
+                                    <div class="box box-widget widget-user">
+                                        <!-- Add the bg color to the header using any of the bg-* classes -->
+                                        <div class="widget-user-header bg-black"
+                                             :style="{ backgroundImage: 'url( http://192.168.43.101/walletChango/storage/app/public/upload/images/projects/original/' + project.image_url + ')'}">
+                                            <h5 class="widget-user-username">{{project.project_name}}</h5>
+                                            <h5 class="widget-user-desc">Project Name</h5>
 
-                                        <a class="btn btn-info btn-xs col-sm-10 " @click="view_project(project.id)">View</a>
+                                        </div>
+
+                                        <div class="box-footer">
+                                            <div class="row">
+                                                <div class="col-sm-4 border-right">
+                                                    <div class="description-block">
+                                                        <h5 class="description-header"> {{project.amount_collected}} of
+                                                            {{project.project_target_amount}}</h5>
+                                                        <span class="description-text">Amount Raised</span>
+                                                    </div>
+                                                    <!-- /.description-block -->
+                                                </div>
+                                                <!-- /.col -->
+                                                <div class="col-sm-4 border-right">
+                                                    <div class="description-block">
+                                                        <h5 class="description-header">
+                                                            {{project.members_subscribed}}</h5>
+                                                        <span class="description-text">Members</span>
+                                                    </div>
+                                                    <!-- /.description-block -->
+                                                </div>
+                                                <!-- /.col -->
+                                                <div class="col-sm-4">
+                                                    <div class="description-block">
+                                                        <h5 class="description-header">35</h5>
+                                                        <span class="description-text">PRODUCTS</span>
+                                                    </div>
+                                                    <!-- /.description-block -->
+                                                </div>
+                                                <!-- /.col -->
+                                            </div>
+                                            <div class="row">
+                                                <div class="box-footer box-comments" style="margin:20px">
+                                                    <div class="box-comment">
+                                                        <!-- User image -->
+                                                        <img class="img-circle img-sm"
+                                                             :src="'http://192.168.43.101/walletChango/storage/app/public/upload/images/projects/original/'+project.image_url"
+                                                             alt="User Image">
+
+                                                        <div class="comment-text">
+                                                              <span class="username">
+                                                                  Project Description                                                                <span
+                                                                  class="text-muted pull-right"></span>
+                                                              </span><br/>
+                                                            {{project.project_description}}
+                                                        </div>
+                                                        <!-- /.comment-text -->
+                                                    </div>
+                                                    <!-- /.box-comment -->
+
+                                                </div>
+
+                                            </div>
+                                            <!-- /.row -->
+                                        </div>
+                                        <div class="row" style=" margin:20px">
+                                            <a class="btn btn-block btn-outline-success "
+                                               @click="view_project(project.id)">View</a>
                                         </div>
                                     </div>
+
+
                                     <!-- /.info-box-content -->
                                 </div>
                                 <!-- /.info-box -->
@@ -110,7 +159,8 @@
                     target_group_number: 0,
                     project_target_amount: 0,
                 }),
-                all_projects: []
+                all_projects: [],
+                image_url: "http://192.168.43.101/walletChango/storage/app/public/upload/images/projects/original/jesuHoffman_1559488427.jpg"
             }
         },
         mounted() {
@@ -129,9 +179,8 @@
             }, view_project(payload) {
 
                 this.$router.push({
-                    name: 'project-view',
                     path: `project-view/${payload}`,
-                    params: {'project_id': payload}
+                    params: {project_id: payload}
                 })
             }
         },

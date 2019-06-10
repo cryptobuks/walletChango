@@ -2182,33 +2182,96 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['project_id'],
+  props: ['id'],
   data: function data() {
     return {
-      all_payments: []
+      all_payments: [],
+      project_details: {},
+      image_url: "http://192.168.43.101/walletChango/storage/app/public/upload/images/projects/original/crowd_fund4.jpg"
     };
   },
   mounted: function mounted() {
     console.log('Component mounted.');
   },
   methods: {
-    fetch_payments: function fetch_payments() {
-      this.$store.dispatch('get_payments', this.project_id);
+    // fetch_payments() {
+    //     this.$store.dispatch('get_payments', this.id)
+    // },
+    fetch_project_details: function fetch_project_details() {
+      this.$store.dispatch('get_project', this.id);
     }
   },
   computed: {
-    load_all_payments: function load_all_payments() {
-      return this.all_payments = this.$store.getters.ALL_PAYMENTS;
+    // load_all_payments() {
+    //     return this.all_payments = this.$store.getters.ALL_PAYMENTS
+    // },
+    load_project_details: function load_project_details() {
+      return this.project_details = this.$store.getters.PROJECT_DETAILS;
     }
   },
   created: function created() {
-    this.fetch_payments();
+    // this.fetch_payments();
+    this.fetch_project_details();
   },
   watch: {
-    load_all_payments: function load_all_payments(new_, old) {
+    // load_all_payments(new_, old) {
+    //     if (new_ != old) {
+    //         this.all_payments = new_;
+    //     }
+    // },
+    load_project_details: function load_project_details(new_, old) {
       if (new_ != old) {
-        this.all_payments = new_;
+        this.project_details = new_;
       }
     }
   }
@@ -2325,6 +2388,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2335,7 +2447,8 @@ __webpack_require__.r(__webpack_exports__);
         target_group_number: 0,
         project_target_amount: 0
       }),
-      all_projects: []
+      all_projects: [],
+      image_url: "http://192.168.43.101/walletChango/storage/app/public/upload/images/projects/original/jesuHoffman_1559488427.jpg"
     };
   },
   mounted: function mounted() {
@@ -2356,10 +2469,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     view_project: function view_project(payload) {
       this.$router.push({
-        name: 'project-view',
         path: "project-view/".concat(payload),
         params: {
-          'project_id': payload
+          project_id: payload
         }
       });
     }
@@ -41891,51 +42003,99 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "container-fluid" }, [
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-sm-8" }, [
+        _c("div", { staticClass: "col-sm-12" }, [
           _c("div", { staticClass: "card" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body p-0" }, [
-              _c("div", { staticClass: "table-responsive" }, [
-                _c("table", { staticClass: "table m-0" }, [
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _c(
-                    "tbody",
-                    _vm._l(_vm.all_payments, function(payments) {
-                      return _c("tr", [
-                        _c("td", [
-                          _c(
-                            "a",
-                            { attrs: { href: "pages/examples/invoice.html" } },
-                            [_vm._v(_vm._s(payments.payment_reference))]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(payments.payment_amount))]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("span", { staticClass: "badge " }, [
-                            _vm._v(_vm._s(payments.user.name))
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            "\n                                       " +
-                              _vm._s(payments.project.project_name) +
-                              "\n                                    "
-                          )
-                        ])
-                      ])
-                    }),
-                    0
-                  )
-                ])
-              ])
+            _c("div", { staticClass: "card-header border-transparent" }, [
+              _c("h3", { staticClass: "card-title" }, [
+                _vm._v(_vm._s(_vm.project_details.project_name) + " Project")
+              ]),
+              _vm._v(" "),
+              _vm._m(0)
             ]),
             _vm._v(" "),
-            _vm._m(2)
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-sm-6" }, [
+                _c("div", { staticClass: "box box-widget" }, [
+                  _c("div", { staticClass: "box-header with-border" }, [
+                    _c("div", { staticClass: "user-block" }, [
+                      _c("img", {
+                        staticClass: "img-lg",
+                        attrs: { src: _vm.image_url, alt: "User Image" }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "username" }, [
+                        _c("a", { attrs: { href: "#" } }, [
+                          _vm._v(
+                            "Created By - " +
+                              _vm._s(_vm.project_details.user.name)
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "description" }, [
+                        _vm._v(_vm._s(_vm.project_details.project_description))
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "box-body" }, [
+                    _c("img", {
+                      staticClass: "img-responsive pad",
+                      attrs: {
+                        src:
+                          "http://192.168.43.101/walletChango/storage/app/public/upload/images/projects/original/" +
+                          _vm.project_details.image_url,
+                        alt: "Photo"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("h4", [
+                      _vm._v(
+                        "Amount collected " +
+                          _vm._s(_vm.project_details.amount_collected) +
+                          " out of " +
+                          _vm._s(_vm.project_details.project_target_amount)
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "pull-right text-muted" }, [
+                      _vm._v(
+                        "Members " +
+                          _vm._s(_vm.project_details.members_subscribed)
+                      )
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-6" }, [
+                _c("div", { staticClass: "nav-tabs-custom" }, [
+                  _c("div", { staticClass: "tab-content" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "tab-pane active",
+                        attrs: { id: "tab_1-1" }
+                      },
+                      [
+                        _c("b", [_vm._v("Project Description:")]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            _vm._s(_vm.project_details.project_details) +
+                              "\n                                        "
+                          )
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(2)
+                  ])
+                ])
+              ])
+            ])
           ])
         ])
       ])
@@ -41947,68 +42107,80 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header border-transparent" }, [
-      _c("h3", { staticClass: "card-title" }, [_vm._v("Latest Payments")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-tools" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-tool",
-            attrs: { type: "button", "data-widget": "collapse" }
-          },
-          [_c("i", { staticClass: "fa fa-minus" })]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-tool",
-            attrs: { type: "button", "data-widget": "remove" }
-          },
-          [_c("i", { staticClass: "fa fa-times" })]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Payment ID")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Amount")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("User")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Project")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-footer clearfix" }, [
+    return _c("div", { staticClass: "card-tools" }, [
       _c(
-        "a",
+        "button",
         {
-          staticClass: "btn btn-sm btn-info float-left",
-          attrs: { href: "javascript:void(0)" }
+          staticClass: "btn btn-tool",
+          attrs: { type: "button", "data-widget": "collapse" }
         },
-        [_vm._v("Place New Paymnet")]
+        [_c("i", { staticClass: "fa fa-minus" })]
       ),
       _vm._v(" "),
       _c(
-        "a",
+        "button",
         {
-          staticClass: "btn btn-sm btn-secondary float-right",
-          attrs: { href: "javascript:void(0)" }
+          staticClass: "btn btn-tool",
+          attrs: { type: "button", "data-widget": "remove" }
         },
-        [_vm._v("View All\n                            Payments")]
+        [_c("i", { staticClass: "fa fa-times" })]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-default btn-xs", attrs: { type: "button" } },
+      [
+        _c("i", { staticClass: "fa fa-share" }),
+        _vm._v(
+          "\n                                        Invite Members\n                                    "
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-6" }, [
+      _c("div", { staticClass: "box box-info" }, [
+        _c("div", { staticClass: "box-header with-border" }, [
+          _c("h3", { staticClass: "box-title" }, [_vm._v("Line Chart")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "box-tools pull-right" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-box-tool",
+                attrs: { type: "button", "data-widget": "collapse" }
+              },
+              [_c("i", { staticClass: "fa fa-minus" })]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-box-tool",
+                attrs: { type: "button", "data-widget": "remove" }
+              },
+              [_c("i", { staticClass: "fa fa-times" })]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "box-body" }, [
+          _c("div", { staticClass: "chart" }, [
+            _c("canvas", {
+              staticStyle: { height: "250px" },
+              attrs: { id: "lineChart" }
+            })
+          ])
+        ])
+      ])
     ])
   }
 ]
@@ -42038,11 +42210,11 @@ var render = function() {
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "card card-default" }, [
           _c("div", { staticClass: "card-header" }, [
-            _vm._v("project\n\n                    "),
+            _vm._v("Project\n\n                    "),
             _c(
               "button",
               {
-                staticClass: "btn btn-success right",
+                staticClass: "btn btn-success right float-right",
                 on: { click: _vm.open_my_modal }
               },
               [
@@ -42059,63 +42231,120 @@ var render = function() {
               "div",
               { staticClass: "row" },
               _vm._l(_vm.all_projects, function(project) {
-                return _c("div", { staticClass: "col-md-6 col-sm-6 col-12" }, [
-                  _c("div", { staticClass: "info-box bg-primary" }, [
-                    _vm._m(0, true),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "info-box-content" }, [
-                      _c("div", { staticClass: "row" }, [
-                        _vm._m(1, true),
-                        _vm._v(" "),
-                        _c("h3", { staticClass: "col-sm-8" }, [
-                          _vm._v(_vm._s(project.project_name))
+                return _c("div", { staticClass: "col-md-4 col-sm-4 " }, [
+                  _c("div", { staticClass: "info-box " }, [
+                    _c("div", { staticClass: "box box-widget widget-user" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "widget-user-header bg-black",
+                          style: {
+                            backgroundImage:
+                              "url( http://192.168.43.101/walletChango/storage/app/public/upload/images/projects/original/" +
+                              project.image_url +
+                              ")"
+                          }
+                        },
+                        [
+                          _c("h5", { staticClass: "widget-user-username" }, [
+                            _vm._v(_vm._s(project.project_name))
+                          ]),
+                          _vm._v(" "),
+                          _c("h5", { staticClass: "widget-user-desc" }, [
+                            _vm._v("Project Name")
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "box-footer" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-sm-4 border-right" }, [
+                            _c("div", { staticClass: "description-block" }, [
+                              _c("h5", { staticClass: "description-header" }, [
+                                _vm._v(
+                                  " " +
+                                    _vm._s(project.amount_collected) +
+                                    " of\n                                                        " +
+                                    _vm._s(project.project_target_amount)
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "description-text" }, [
+                                _vm._v("Amount Raised")
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-4 border-right" }, [
+                            _c("div", { staticClass: "description-block" }, [
+                              _c("h5", { staticClass: "description-header" }, [
+                                _vm._v(
+                                  "\n                                                        " +
+                                    _vm._s(project.members_subscribed)
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "description-text" }, [
+                                _vm._v("Members")
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(0, true)
                         ]),
                         _vm._v(" "),
-                        _vm._m(2, true),
-                        _c("h4", { staticClass: "col-sm-8" }, [
-                          _vm._v(
-                            " Kshs . " +
-                              _vm._s(project.amount_collected) +
-                              " of " +
-                              _vm._s(project.project_target_amount) +
-                              " "
+                        _c("div", { staticClass: "row" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "box-footer box-comments",
+                              staticStyle: { margin: "20px" }
+                            },
+                            [
+                              _c("div", { staticClass: "box-comment" }, [
+                                _c("img", {
+                                  staticClass: "img-circle img-sm",
+                                  attrs: {
+                                    src:
+                                      "http://192.168.43.101/walletChango/storage/app/public/upload/images/projects/original/" +
+                                      project.image_url,
+                                    alt: "User Image"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "comment-text" }, [
+                                  _vm._m(1, true),
+                                  _c("br"),
+                                  _vm._v(
+                                    "\n                                                        " +
+                                      _vm._s(project.project_description) +
+                                      "\n                                                    "
+                                  )
+                                ])
+                              ])
+                            ]
                           )
                         ])
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "progress" }, [
-                        _c("div", {
-                          staticClass: "progress-bar",
-                          style: { width: project.members_count + "%" }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "progress-description" }, [
-                        _vm._v(
-                          "\n                                        " +
-                            _vm._s(
-                              (project.amount_collected /
-                                project.project_target_amount) *
-                                100
-                            ) +
-                            "%\n                                        "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "timeline-footer" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-info btn-xs col-sm-10 ",
-                            on: {
-                              click: function($event) {
-                                return _vm.view_project(project.id)
+                      _c(
+                        "div",
+                        { staticClass: "row", staticStyle: { margin: "20px" } },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-block btn-outline-success ",
+                              on: {
+                                click: function($event) {
+                                  return _vm.view_project(project.id)
+                                }
                               }
-                            }
-                          },
-                          [_vm._v("View")]
-                        )
-                      ])
+                            },
+                            [_vm._v("View")]
+                          )
+                        ]
+                      )
                     ])
                   ])
                 ])
@@ -42175,7 +42404,7 @@ var render = function() {
                   [_vm._v("Update project's Information")]
                 ),
                 _vm._v(" "),
-                _vm._m(3)
+                _vm._m(2)
               ]),
               _vm._v(" "),
               _c(
@@ -42194,7 +42423,7 @@ var render = function() {
                       "div",
                       { staticClass: "form-group" },
                       [
-                        _vm._m(4),
+                        _vm._m(3),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
@@ -42304,26 +42533,23 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "info-box-icon" }, [
-      _c("i", { staticClass: "fas fa-weight fa-3x white" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "info-box-text col-sm-4" }, [
-      _c("b", [_vm._v("Projects Name:")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "info-box-number col-sm-4" }, [
-      _c("b", [
-        _vm._v("Amount Raised:\n                                        ")
+    return _c("div", { staticClass: "col-sm-4" }, [
+      _c("div", { staticClass: "description-block" }, [
+        _c("h5", { staticClass: "description-header" }, [_vm._v("35")]),
+        _vm._v(" "),
+        _c("span", { staticClass: "description-text" }, [_vm._v("PRODUCTS")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "username" }, [
+      _vm._v(
+        "\n                                                              Project Description                                                                "
+      ),
+      _c("span", { staticClass: "text-muted pull-right" })
     ])
   },
   function() {
@@ -58699,6 +58925,7 @@ window.toast = toast;
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   mode: 'history',
+  history: true,
   routes: _routes__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 Vue.filter('custom_date', function (date) {
@@ -59277,6 +59504,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     group_created_status: [],
     all_payments: [],
     all_projects: [],
+    project_details: {},
     project_created_status: [],
     all_wallets: [],
     wallet_created_status: []
@@ -59304,6 +59532,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     /*---------------------*/
     SET_ALL_PROJECTS: function SET_ALL_PROJECTS(state, payload) {
       return state.all_projects = payload;
+    },
+    SET_PROJECT_DETAILS: function SET_PROJECT_DETAILS(state, payload) {
+      return state.project_details = payload;
     },
     SET_PROJECTS_CREATE_RESPONSE: function SET_PROJECTS_CREATE_RESPONSE(state, payload) {
       return state.project_created_status = payload;
@@ -59389,7 +59620,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
       var response_data = {};
       axios.get(baseURL + '/project/' + payload).then(function (response) {
         console.log(response.data);
-        context.commit("SET_ALL_PROJECTS", response.data);
+        context.commit("SET_PROJECT_DETAILS", response.data);
         response_data = response.data;
       }).catch(function (error) {
         return error;
@@ -59491,6 +59722,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     /*---------------------*/
     ALL_PROJECTS: function ALL_PROJECTS(state) {
       return state.all_projects;
+    },
+    PROJECT_DETAILS: function PROJECT_DETAILS(state) {
+      return state.project_details;
     },
     PROJECTS_CREATION_RESPONSE: function PROJECTS_CREATION_RESPONSE(state) {
       return state.project_create;

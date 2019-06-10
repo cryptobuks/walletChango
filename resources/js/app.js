@@ -48,6 +48,7 @@ window.toast = toast;;
 
 const router = new VueRouter({
     mode: 'history',
+    history: true,
     routes
 })
 

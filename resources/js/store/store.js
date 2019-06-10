@@ -14,6 +14,7 @@ const store = new Vuex.Store({
 
 
         all_projects: [],
+        project_details: {},
         project_created_status: [],
 
         all_wallets: [],
@@ -42,6 +43,8 @@ const store = new Vuex.Store({
         SET_ALL_PROJECTS: (state, payload) => {
             return state.all_projects = payload;
 
+        }, SET_PROJECT_DETAILS: (state, payload) => {
+            return state.project_details = payload;
         }, SET_PROJECTS_CREATE_RESPONSE: (state, payload) => {
             return state.project_created_status = payload
         },   /*----------------------
@@ -110,21 +113,23 @@ const store = new Vuex.Store({
         get_projects: (context) => {
             let response_data = {};
             axios.get(baseURL + '/project').then(response => {
+
                 context.commit("SET_ALL_PROJECTS", response.data);
                 response_data = response.data
             }).catch(error => {
                 return error;
-            })
+            });
             return response_data
         }, get_project: (context, payload) => {
             let response_data = {};
             axios.get(baseURL + '/project/' + payload).then(response => {
                 console.log(response.data)
-                context.commit("SET_ALL_PROJECTS", response.data);
+
+                context.commit("SET_PROJECT_DETAILS", response.data);
                 response_data = response.data
             }).catch(error => {
                 return error;
-            })
+            });
             return response_data
         }, save_projects: (context, payload) => {
             axios.post(baseURL + '/project/', payload).then(response => {
@@ -172,7 +177,6 @@ const store = new Vuex.Store({
         }, save_wallets: (context, payload) => {
             axios.post(baseURL + '/wallet/', payload).then(response => {
                 context.commit("SET_ALL_WALLETS", response.data);
-
                 if (response.status == 200) {
                     context.commit("SET_WALLETS_CREATE_RESPONSE", 1);
                     toast.fire({
@@ -209,6 +213,7 @@ const store = new Vuex.Store({
        ------payments -------
      /*---------------------*/
         ALL_PROJECTS: state => state.all_projects,
+        PROJECT_DETAILS: state => state.project_details,
         PROJECTS_CREATION_RESPONSE: state => state.project_create,
         /*----------------------
        ------wallets -------

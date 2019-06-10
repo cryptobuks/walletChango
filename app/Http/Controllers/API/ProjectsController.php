@@ -15,7 +15,8 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        return Projects::with('user','group')->get()->take(15);
+        $projects = Projects::with('user', 'group')->get()->take(15);
+        return $projects;
     }
 
     /**
@@ -31,7 +32,7 @@ class ProjectsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -42,12 +43,13 @@ class ProjectsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return Projects::with('user')->where('id', $id)->first();
+       return $projects = Projects::with('user')->where('id', $id)->first();
+
 //        return Projects::with('user')->join('tbl_payments', 'tbl_projects.id', '=', 'tbl_payments.project_id')
 //            ->where('tbl_projects.id', $id)->get();
 
@@ -56,7 +58,7 @@ class ProjectsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -67,8 +69,8 @@ class ProjectsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -79,7 +81,7 @@ class ProjectsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

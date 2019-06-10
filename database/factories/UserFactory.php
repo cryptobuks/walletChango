@@ -59,11 +59,15 @@ $factory->define(Projects::class, function (Faker $faker) {
     return [
         'project_name' => $faker->name,
         'project_description' => $faker->realText(),
+        'image_url' => $faker->randomElement(['crowd_fund.jpg', 'crowd_fund2.jpg'
+            , 'crowd_fund3.jpg', 'crowd_fund4.jpg', 'crowd_fund5.jpg', 'crowd_fund6.jpg', 'fund.png']),
+        'project_details' => $faker->realText(),
         'target_group_number' => $faker->numberBetween($min = 1, $max = 20),
         'project_target_amount' => $faker->numberBetween(100, 1000),
         'members_subscribed' => $faker->numberBetween(5, 15),
         'project_initiated_by' => App\User::all()->random()->id,
-        'amount_collected' => $faker->numberBetween(100, 1000),
+        'amount_collected' => $faker->numberBetween(100, 600),
+        'project_type' => $faker->numberBetween(1, 2),
         'group_id' => App\Group::all()->random()->id,
         'updated_at' => now(),
         'created_at' => now(),

@@ -197,7 +197,9 @@ class ProjectsController extends Controller
      */
     public function show($id)
     {
-        return $projects = Projects::with('user')->where('id', $id)->first();
+        $projects = Projects::with('user', 'payments')->where('id', $id)->first();
+        $projects->append('project_members')->toArray();
+        return $projects;
 
 //        return Projects::with('user')->join('tbl_payments', 'tbl_projects.id', '=', 'tbl_payments.project_id')
 //            ->where('tbl_projects.id', $id)->get();

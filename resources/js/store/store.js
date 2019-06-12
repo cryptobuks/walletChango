@@ -132,8 +132,8 @@ const store = new Vuex.Store({
             axios.post(baseURL + '/invite/', payload, config).then(response => {
                 context.commit("SET_GROUP_INVITE", response.data);
                 if (response.status == 200) {
-
-                    if (response.data.status_code === 0) {
+                    console.log(response.data)
+                    if (response.data.status_code == 0) {
                         context.commit("SET_GROUP_INVITE_RESPONSE", 1);
                         toast.fire({
                             type: 'success',
@@ -142,7 +142,7 @@ const store = new Vuex.Store({
                     } else {
                         toast.fire({
                             type: 'error',
-                            title: 'Failed to send a Group Invite send ' + response.data.message
+                            title: 'Failed to send a Group Invite send ' + response.data.status_code
                         })
                     }
                 } else {

@@ -62,7 +62,8 @@ class InviteController extends Controller
         /*
          * inite to a group
          */
-        if ($request->invite_type = 0) {
+
+        if ($request->invite_type == 0) {
             $validator = Validator::make($request->all(), [
                 'group_id' => 'required',]);
             if (!$validator->passes()) {
@@ -80,7 +81,7 @@ class InviteController extends Controller
         }    /*
          * inite to a project
          */
-        if ($request->invite_type = 1) {
+        if ($request->invite_type == 1) {
             $validator = Validator::make($request->all(), [
                 'project_id' => 'required',]);
             if (!$validator->passes()) {
@@ -115,24 +116,24 @@ class InviteController extends Controller
         // fill the rest of the message
         if (isset($request->project_id)) {
             $project = Projects::find($request->project_id);
-            $message .= " You have been invited by " . $check_token['data']['name'] . " to project " .
+            $message .= " You have been invited by " . $check_token['data']['name'] . " to Project " .
                 $project->project_name . " use code " . $code . $invite_code . " to join";
 
         }
         if (isset($request->group_id)) {
-            $group = Group::find($request->project_id);
-            $message .= " You have been invited by " . $check_token['data']['name'] . " to group " .
+            $group = Group::find($request->group_id);
+            $message .= " You have been invited by " . $check_token['data']['name'] . " to Group " .
                 $group->group_name . " use code " . $code . $invite_code . " to join";
 
         }
 
 
         $send_sms = (new WalletChangoUtils())->send_sms($phone_no, $message)[0];
-        if ($send_sms->status == "success") {
+        if (strtolower($send_sms->status) == "success") {
             $response = api_response(true, null, 0, "success",
                 "send invite successfully", null);
         } else {
-            $response = api_response(true, null, 1, "success",
+            $response = api_response(true, null, 1, "failed",
                 $send_sms->status, null);
         }
         if ($response["status_code"] == 0) {
@@ -151,6 +152,14 @@ class InviteController extends Controller
             }
             $invite->invite_status = 0;
             $invite->save();
+            if ($invite) {
+                return api_response(true, null, 0, "success",
+                    "Send invite successfully", null);
+            } else {
+                return $response = api_response(true, null, 1, "failed",
+                    "Inivte not sent ", null);
+
+            }
         } else {
             return $response;
         }

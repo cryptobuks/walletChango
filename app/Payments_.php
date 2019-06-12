@@ -11,6 +11,7 @@ class Payments_ extends Model
     protected $fillable = [
         'group_name', 'members_count', 'group_uuid'
     ];
+    protected $appends = ['paid_at'];
 
     public function user()
     {
@@ -19,7 +20,12 @@ class Payments_ extends Model
 
     public function project()
     {
-        return $this->hasMany(Projects::class,'id','project_id');
+        return $this->hasMany(Projects::class, 'id', 'project_id');
+    }
+
+    public function getPaidAtAttribute()
+    {
+        return $this->created_at->diffForHumans();
     }
 
 }

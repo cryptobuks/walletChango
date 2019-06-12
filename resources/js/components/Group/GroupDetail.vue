@@ -104,7 +104,7 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer clearfix">
-                            <a>Invite Members</a>
+                            <a class="btn btn-sm btn-info float-left" @click="open_my_modal">Send Invite</a>
                             <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All
                                 Payments</a>
                         </div>
@@ -164,6 +164,45 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade in" id="send_invite" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <!-- form start -->
+                        <h5 class="modal-title">Send Invite</h5>
+                    </div>
+                    <form @submit.prevent="sendUserInvite()">
+                        <div class="modal-body">
+                            <div class="form-group">
+
+                                <div class="row">
+                                    <div class="col-3">
+                                        <label for="phone_no"></label>
+                                    </div>
+                                </div>
+                                <input v-model="form.phone_no" type="text" name="phone_no"
+                                       placeholder="Phone Number"
+                                       id="phone_no"
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('phone_no') }">
+                                <has-error :form="form" field="phone_no"></has-error>
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close
+                            </button>
+                            <button  :disabled="form.busy" type="submit" class="btn btn-primary">
+                                Invite
+                            </button>
+
+                        </div>
+                    </form>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
 
     </div>
 </template>
@@ -176,15 +215,26 @@
             return {
                 all_payments: [],
                 group_details: [],
+                form: new Form({
+                    phone_no: '',
+                    invite_type: 1,
+                    project_id: this.id,
+
+                }),
             }
         },
         mounted() {
             console.log('Component mounted.')
         }, methods: {
+            open_my_modal() {
+                $("#send_invite").modal('show');
+            },
             fetch_payments() {
                 this.$store.dispatch('get_payments', this.id)
             }, fetch_group_details() {
                 this.$store.dispatch('get_group_details', this.id)
+            }, sendUserInvite() {
+                this.$store.dispatch("send_group_invite", this.form);
             }
         },
         computed: {
@@ -192,6 +242,8 @@
                 return this.all_payments = this.$store.getters.ALL_PAYMENTS
             }, load_all_group_details() {
                 return this.group_details = this.$store.getters.ALL_GROUP_DETAILS
+            }, load_send_group_invite() {
+                return this.group_details = this.$store.getters.GROUP_CREATION_RESPONSE
             }
         },
         created() {
@@ -206,6 +258,12 @@
             }, load_all_group_details(new_, old) {
                 if (new_ != old) {
                     this.group_details = new_;
+
+                }
+            }, load_send_group_invite(new_, old) {
+                if (new_ == 1) {
+                    this.group_details = new_;
+                    $("#send_invite").modal('hide');
 
                 }
             }

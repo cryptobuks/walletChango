@@ -1954,6 +1954,45 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function($) {//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2129,18 +2168,29 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       all_payments: [],
-      group_details: []
+      group_details: [],
+      form: new Form({
+        phone_no: '',
+        invite_type: 1,
+        project_id: this.id
+      })
     };
   },
   mounted: function mounted() {
     console.log('Component mounted.');
   },
   methods: {
+    open_my_modal: function open_my_modal() {
+      $("#send_invite").modal('show');
+    },
     fetch_payments: function fetch_payments() {
       this.$store.dispatch('get_payments', this.id);
     },
     fetch_group_details: function fetch_group_details() {
       this.$store.dispatch('get_group_details', this.id);
+    },
+    sendUserInvite: function sendUserInvite() {
+      this.$store.dispatch("send_group_invite", this.form);
     }
   },
   computed: {
@@ -2149,6 +2199,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     load_all_group_details: function load_all_group_details() {
       return this.group_details = this.$store.getters.ALL_GROUP_DETAILS;
+    },
+    load_send_group_invite: function load_send_group_invite() {
+      return this.group_details = this.$store.getters.GROUP_CREATION_RESPONSE;
     }
   },
   created: function created() {
@@ -2165,9 +2218,16 @@ __webpack_require__.r(__webpack_exports__);
       if (new_ != old) {
         this.group_details = new_;
       }
+    },
+    load_send_group_invite: function load_send_group_invite(new_, old) {
+      if (new_ == 1) {
+        this.group_details = new_;
+        $("#send_invite").modal('hide');
+      }
     }
   }
 });
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 
@@ -2321,8 +2381,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         a: 30,
         b: 20
       }],
-      barData: [],
-      bar_Data: [{
+      bar_Data: [],
+      barData: [{
         "month": "January",
         "payment_amount": 225
       }, {
@@ -42652,18 +42712,36 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(8)
+            _c("div", { staticClass: "card-footer clearfix" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-sm btn-info float-left",
+                  on: { click: _vm.open_my_modal }
+                },
+                [_vm._v("Send Invite")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-sm btn-secondary float-right",
+                  attrs: { href: "javascript:void(0)" }
+                },
+                [_vm._v("View All\n                            Payments")]
+              )
+            ])
           ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-sm-6" }, [
           _c("div", { staticClass: "card" }, [
-            _vm._m(9),
+            _vm._m(8),
             _vm._v(" "),
             _c("div", { staticClass: "card-body p-0" }, [
               _c("div", { staticClass: "table-responsive" }, [
                 _c("table", { staticClass: "table m-0" }, [
-                  _vm._m(10),
+                  _vm._m(9),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -42700,11 +42778,119 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(11)
+            _vm._m(10)
           ])
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade in",
+        attrs: { id: "send_invite", role: "dialog" }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(11),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.sendUserInvite()
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _vm._m(12),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.phone_no,
+                              expression: "form.phone_no"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.form.errors.has("phone_no")
+                          },
+                          attrs: {
+                            type: "text",
+                            name: "phone_no",
+                            placeholder: "Phone Number",
+                            id: "phone_no"
+                          },
+                          domProps: { value: _vm.form.phone_no },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "phone_no",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "phone_no" }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger pull-left",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("Close\n                        ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { disabled: _vm.form.busy, type: "submit" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            Invite\n                        "
+                        )
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -42832,23 +43018,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-footer clearfix" }, [
-      _c("a", [_vm._v("Invite Members")]),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-sm btn-secondary float-right",
-          attrs: { href: "javascript:void(0)" }
-        },
-        [_vm._v("View All\n                            Payments")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header border-transparent" }, [
       _c("h3", { staticClass: "card-title" }, [_vm._v("Latest Payments")]),
       _vm._v(" "),
@@ -42911,6 +43080,24 @@ var staticRenderFns = [
         },
         [_vm._v("View All\n                            Payments")]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Send Invite")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-3" }, [
+        _c("label", { attrs: { for: "phone_no" } })
+      ])
     ])
   }
 ]
@@ -71376,6 +71563,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     all_groups: [],
     group_details: [],
     group_created_status: [],
+    group_invite: [],
+    group_invite_status: [],
     all_payments: [],
     all_projects: [],
     project_details: {},
@@ -71408,6 +71597,12 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     SET_GROUP_CREATE_RESPONSE: function SET_GROUP_CREATE_RESPONSE(state, payload) {
       return state.group_created_status = payload;
+    },
+    SET_GROUP_INVITE: function SET_GROUP_INVITE(state, payload) {
+      return state.group_invite = payload;
+    },
+    SET_GROUP_INVITE_RESPONSE: function SET_GROUP_INVITE_RESPONSE(state, payload) {
+      return state.group_invite_status = payload;
     },
 
     /*----------------------
@@ -71486,6 +71681,34 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
         return response;
       });
     },
+    send_group_invite: function send_group_invite(context, payload) {
+      axios.post(baseURL + '/invite/', payload, config).then(function (response) {
+        context.commit("SET_GROUP_INVITE", response.data);
+
+        if (response.status == 200) {
+          if (response.data.status_code === 0) {
+            context.commit("SET_GROUP_INVITE_RESPONSE", 1);
+            toast.fire({
+              type: 'success',
+              title: 'Group Invite send  successfully'
+            });
+          } else {
+            toast.fire({
+              type: 'error',
+              title: 'Failed to send a Group Invite send ' + response.data.message
+            });
+          }
+        } else {
+          context.commit("SET_GROUP_INVITE_RESPONSE", 1);
+          toast.fire({
+            type: 'error',
+            title: 'Failed to send a Group Invite send  '
+          });
+        }
+
+        return response;
+      });
+    },
 
     /*------------------------------------------------*/
 
@@ -71494,7 +71717,6 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     /*------------------------------------------------*/
     get_payments: function get_payments(context, payload) {
       axios.get(baseURL + "/payment/group/" + payload, config).then(function (response) {
-        console.log(response);
         context.commit("SET_ALL_PAYMENTS", response.data);
       }).catch(function (error) {
         toast.fire({
@@ -71663,6 +71885,12 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     GROUP_CREATION_RESPONSE: function GROUP_CREATION_RESPONSE(state) {
       return state.group_created_status;
+    },
+    GROUP_INVITE: function GROUP_INVITE(state) {
+      return state.group_invite;
+    },
+    GROUP_INVITE_RESPONSE: function GROUP_INVITE_RESPONSE(state) {
+      return state.group_invite;
     },
 
     /*----------------------

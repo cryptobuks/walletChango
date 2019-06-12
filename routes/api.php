@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,10 +20,13 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
 
 });
 
-Route::group(['middleware' => ['api','jwt.auth']], function () {
+Route::group(['middleware' => ['api', 'jwt.auth']], function () {
 
     Route::apiResources(['group' => 'API\GroupController']);
-
+    /*--------------------------------------------------------*/
+//            Payment routes
+    /*--------------------------------------------------------*/
+    Route::apiResources(['invite' => 'API\InviteController']);
 
     /*--------------------------------------------------------*/
 //            Payment routes

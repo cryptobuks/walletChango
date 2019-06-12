@@ -121,8 +121,8 @@
                         {year: '2015', a: 20, b: 25},
                         {year: '2016', a: 30, b: 20},
                     ],
-                barData:[],
-                bar_Data: [{"month": "January", "payment_amount": 225}, {
+                bar_Data:[],
+                barData: [{"month": "January", "payment_amount": 225}, {
                     "month": "February",
                     "payment_amount": 107
                 }, {"month": "March", "payment_amount": 231}, {

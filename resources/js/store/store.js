@@ -13,6 +13,8 @@ const store = new Vuex.Store({
         all_groups: [],
         group_details: [],
         group_created_status: [],
+        group_invite: [],
+        group_invite_status: [],
 
 
         all_payments: [],
@@ -28,6 +30,8 @@ const store = new Vuex.Store({
 
         user_token: [],
         authenticate_token_status: [],
+
+
     },
     mutations: {
         /*----------------------
@@ -45,12 +49,15 @@ const store = new Vuex.Store({
         /*---------------------*/
         SET_ALL_GROUPS: (state, payload) => {
             return state.all_groups = payload;
-
         }, SET_GROUP_DETAILS: (state, payload) => {
             return state.group_details = payload;
 
         }, SET_GROUP_CREATE_RESPONSE: (state, payload) => {
             return state.group_created_status = payload
+        }, SET_GROUP_INVITE: (state, payload) => {
+            return state.group_invite = payload
+        }, SET_GROUP_INVITE_RESPONSE: (state, payload) => {
+            return state.group_invite_status = payload
         },
         /*----------------------
           ------payments -------
@@ -121,6 +128,33 @@ const store = new Vuex.Store({
                 return response;
 
             })
+        }, send_group_invite: (context, payload) => {
+            axios.post(baseURL + '/invite/', payload, config).then(response => {
+                context.commit("SET_GROUP_INVITE", response.data);
+                if (response.status == 200) {
+
+                    if (response.data.status_code === 0) {
+                        context.commit("SET_GROUP_INVITE_RESPONSE", 1);
+                        toast.fire({
+                            type: 'success',
+                            title: 'Group Invite send  successfully'
+                        })
+                    } else {
+                        toast.fire({
+                            type: 'error',
+                            title: 'Failed to send a Group Invite send ' + response.data.message
+                        })
+                    }
+                } else {
+                    context.commit("SET_GROUP_INVITE_RESPONSE", 1);
+                    toast.fire({
+                        type: 'error',
+                        title: 'Failed to send a Group Invite send  '
+                    })
+                }
+                return response;
+
+            })
         },
 
         /*------------------------------------------------*/
@@ -129,8 +163,6 @@ const store = new Vuex.Store({
 
         get_payments(context, payload) {
             axios.get(baseURL + "/payment/group/" + payload, config).then(response => {
-                console.log(response)
-
                 context.commit("SET_ALL_PAYMENTS", response.data)
             }).catch(error => {
                 toast.fire({
@@ -285,6 +317,8 @@ const store = new Vuex.Store({
         ALL_GROUPS: state => state.all_groups,
         ALL_GROUP_DETAILS: state => state.group_details,
         GROUP_CREATION_RESPONSE: state => state.group_created_status,
+        GROUP_INVITE: state => state.group_invite,
+        GROUP_INVITE_RESPONSE: state => state.group_invite,
 
         /*----------------------
           ------payments -------

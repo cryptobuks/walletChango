@@ -7,6 +7,7 @@ const baseURL = "http://127.0.0.1:8000/api";
 const store = new Vuex.Store({
     state: {
         all_groups: [],
+        group_details: [],
         group_created_status: [],
 
 
@@ -15,6 +16,7 @@ const store = new Vuex.Store({
 
         all_projects: [],
         project_details: {},
+        project_monthly_payments: {},
         project_created_status: [],
 
         all_wallets: [],
@@ -26,6 +28,9 @@ const store = new Vuex.Store({
         /*---------------------*/
         SET_ALL_GROUPS: (state, payload) => {
             return state.all_groups = payload;
+
+        }, SET_GROUP_DETAILS: (state, payload) => {
+            return state.group_details = payload;
 
         }, SET_GROUP_CREATE_RESPONSE: (state, payload) => {
             return state.group_created_status = payload
@@ -42,9 +47,10 @@ const store = new Vuex.Store({
        /*---------------------*/
         SET_ALL_PROJECTS: (state, payload) => {
             return state.all_projects = payload;
-
         }, SET_PROJECT_DETAILS: (state, payload) => {
             return state.project_details = payload;
+        }, SET_PROJECT_MONTHLY_PAYMENTS: (state, payload) => {
+            return state.project_monthly_payments = payload;
         }, SET_PROJECTS_CREATE_RESPONSE: (state, payload) => {
             return state.project_created_status = payload
         },   /*----------------------
@@ -64,6 +70,16 @@ const store = new Vuex.Store({
             axios.get(baseURL + '/group').then(response => {
                 context.commit("SET_ALL_GROUPS", response.data);
                 response_data = response.data
+            }).catch(error => {
+                return error;
+            })
+            return response_data
+        }, get_group_details: (context, payload) => {
+            let response_data = {};
+            axios.get(baseURL + '/group/' + payload).then(response => {
+                context.commit("SET_GROUP_DETAILS", response.data);
+                response_data = response.data
+
             }).catch(error => {
                 return error;
             })
@@ -110,7 +126,17 @@ const store = new Vuex.Store({
         /*------------------------------------------------*/
         /*                      projects                  */
         /*------------------------------------------------*/
-        get_projects: (context) => {
+        get_monthly_payments: (context, payload) => {
+            console.log("laods_ " + payload)
+            let response_data = {};
+            axios.get(baseURL + '/project/' + payload + '/chart').then(response => {
+                context.commit("SET_PROJECT_MONTHLY_PAYMENTS", response.data);
+                // response_data = response.data
+            }).catch(error => {
+                return error;
+            });
+            return response_data
+        }, get_projects: (context) => {
             let response_data = {};
             axios.get(baseURL + '/project').then(response => {
 
@@ -202,6 +228,7 @@ const store = new Vuex.Store({
           ------group -------
         /*---------------------*/
         ALL_GROUPS: state => state.all_groups,
+        ALL_GROUP_DETAILS: state => state.group_details,
         GROUP_CREATION_RESPONSE: state => state.group_created_status,
 
         /*----------------------
@@ -210,10 +237,11 @@ const store = new Vuex.Store({
         ALL_PAYMENTS: state => state.all_payments,
 
         /*----------------------
-       ------payments -------
+       ------projects -------
      /*---------------------*/
         ALL_PROJECTS: state => state.all_projects,
         PROJECT_DETAILS: state => state.project_details,
+        PROJECT_MONTHLY_PAYMENTS: state => state.project_monthly_payments,
         PROJECTS_CREATION_RESPONSE: state => state.project_create,
         /*----------------------
        ------wallets -------

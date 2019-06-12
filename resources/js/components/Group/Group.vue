@@ -121,8 +121,9 @@
                 this.$store.dispatch("save_groups", this.form);
             }, view_group(payload) {
 
-                this.$router.push({name: 'group-view',path:`group-view/${payload}`, params: {'group_id': payload}})
+                this.$router.push({path:`group-view/${payload}`, params: {group_id: payload}})
             }
+
         },
         computed: {
             load_all_chama() {

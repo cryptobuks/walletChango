@@ -20,6 +20,7 @@ class CreateTransactionsTable extends Migration
             $table->string("amount");
             $table->string("reference")->nullable()->unique();
             $table->string("transaction_type");
+            $table->softDeletes();
             $table->timestamps();
         });
     }

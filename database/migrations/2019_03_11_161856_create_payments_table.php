@@ -18,8 +18,9 @@ class CreatePaymentsTable extends Migration
             $table->string("payment_reference");
             $table->string("payment_amount");
             $table->string("user_id");
-            $table->string("project_id");
-            $table->string("group_id");
+            $table->string("project_id")->nullable();
+            $table->string("group_id")->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

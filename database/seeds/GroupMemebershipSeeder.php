@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PaymentSeeder extends Seeder
+class GroupMemebershipSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,8 +11,6 @@ class PaymentSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Payments_::class, 300)->create();
+        factory(App\GroupMembership::class, 15)->create();
     }
-
-
 }

@@ -25,6 +25,7 @@ class CreateProjectsTable extends Migration
             $table->integer('project_initiated_by');
             $table->integer('group_id');
             $table->integer('project_type')->default(0);
+            $table->softDeletes();
             $table->float('amount_collected')->nullable()->default(0);
             $table->timestamps();
         });

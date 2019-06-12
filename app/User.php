@@ -47,6 +47,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Wallet::class, 'user_id');
     }
 
+    public function groups()
+    {
+        return $this->hasMany(GroupMembership::class, 'user_id', 'id');
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *

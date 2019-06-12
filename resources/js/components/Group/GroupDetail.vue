@@ -7,8 +7,7 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>150</h3>
-
+                            <h3>{{group_details.members_count}}</h3>
                             <p>Members</p>
                         </div>
                         <div class="icon">
@@ -22,7 +21,7 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>53<sup style="font-size: 20px">%</sup></h3>
+                            <h3>{{group_details.group_payments_total}}<sup style="font-size: 20px">Kshs</sup></h3>
 
                             <p>Members Contribution</p>
                         </div>
@@ -93,15 +92,15 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr v-for="payments in all_payments">
-                                        <td><a href="pages/examples/invoice.html">{{payments.payment_reference}}</a>
-                                        </td>
-                                        <td>{{payments.payment_amount}}</td>
-                                        <td><span class="badge ">{{payments.user.name}}</span></td>
-                                        <td>
-                                           {{payments.project.project_name}}
-                                        </td>
-                                    </tr>
+                                    <!--                                    <tr v-for="payments in all_payments">-->
+                                    <!--                                        <td><a href="pages/examples/invoice.html">{{payments.payment_reference}}</a>-->
+                                    <!--                                        </td>-->
+                                    <!--                                        <td>{{payments.payment_amount}}</td>-->
+                                    <!--                                        <td><span class="badge ">{{payments.user.name}}</span></td>-->
+                                    <!--                                        <td>-->
+                                    <!--                                            {{payments.project.project_name}}-->
+                                    <!--                                        </td>-->
+                                    <!--                                    </tr>-->
                                     </tbody>
                                 </table>
                             </div>
@@ -125,31 +124,42 @@
 <script>
 
     export default {
-        props: ['group_id'],
+        props: ['id'],
         data() {
             return {
                 all_payments: [],
+                group_details: [],
             }
         },
         mounted() {
             console.log('Component mounted.')
         }, methods: {
             fetch_payments() {
-                this.$store.dispatch('get_payments', this.group_id)
+                this.$store.dispatch('get_payments', this.id)
+            }, fetch_group_details() {
+                this.$store.dispatch('get_group_details', this.id)
             }
         },
         computed: {
             load_all_payments() {
                 return this.all_payments = this.$store.getters.ALL_PAYMENTS
+            }, load_all_group_details() {
+                return this.group_details = this.$store.getters.ALL_GROUP_DETAILS
             }
         },
         created() {
             this.fetch_payments();
+            this.fetch_group_details();
         },
         watch: {
             load_all_payments(new_, old) {
                 if (new_ != old) {
                     this.all_payments = new_;
+                }
+            }, load_all_group_details(new_, old) {
+                if (new_ != old) {
+                    this.group_details = new_;
+
                 }
             }
 

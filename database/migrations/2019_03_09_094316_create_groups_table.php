@@ -18,6 +18,7 @@ class CreateGroupsTable extends Migration
             $table->string("group_name");
             $table->string("members_count")->nullable()->default(0);
             $table->string("group_uuid");
+            $table->softDeletes();
             $table->timestamps();
         });
     }

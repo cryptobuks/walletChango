@@ -13,6 +13,8 @@ import store from './store/store'
 import routes from './routes'
 import {AlertError, Form, HasError} from 'vform'
 import swal from 'sweetalert2'
+import Raphael from 'raphael/raphael'
+global.Raphael = Raphael
 
 
 

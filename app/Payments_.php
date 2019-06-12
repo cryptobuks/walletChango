@@ -19,7 +19,7 @@ class Payments_ extends Model
 
     public function project()
     {
-        return $this->belongsToMany('App\Projects');
+        return $this->hasMany(Projects::class,'id','project_id');
     }
 
 }

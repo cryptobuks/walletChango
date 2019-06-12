@@ -77,11 +77,17 @@ $factory->define(Projects::class, function (Faker $faker) {
 $factory->define(Payments_::class, function (Faker $faker) {
     return [
         'payment_reference' => $faker->name,
-        'payment_amount' => $faker->randomNumber(),
+        'payment_amount' => $faker->numberBetween(100, 600),
         'user_id' => App\User::all()->random()->id,
         'project_id' => App\Projects::all()->random()->id,
+//        'group_id' => App\Group::all()->random()->id,
+        'updated_at' => $faker->dateTimeThisYear(),
+        'created_at' => $faker->dateTimeThisYear(),
+    ];
+});
+$factory->define(\App\GroupMembership::class, function (Faker $faker) {
+    return [
         'group_id' => App\Group::all()->random()->id,
-        'updated_at' => now(),
-        'created_at' => now(),
+        'user_id' =>App\User::all()->random()->id,
     ];
 });

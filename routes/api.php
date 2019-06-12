@@ -38,7 +38,7 @@ Route::group(['middleware' => 'api',], function () {
 //            Projects routes
     /*--------------------------------------------------------*/
     Route::apiResources(['project' => 'API\ProjectsController']);
-
+    Route::get('project/{id}/chart', 'API\ProjectsController@chart_payments');
 
     /*--------------------------------------------------------*/
 //            Wallet routes

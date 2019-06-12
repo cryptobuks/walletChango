@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class CreateWalletsTable extends Migration
+class CreateGroupMembershipsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateWalletsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_wallets', function (Blueprint $table) {
+        Schema::create('group_memberships', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer("group_id");
             $table->integer("user_id");
-            $table->string('wallet_name');
-            $table->string('wallet_amount');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +29,6 @@ class CreateWalletsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_wallets');
+        Schema::dropIfExists('group_memberships');
     }
 }

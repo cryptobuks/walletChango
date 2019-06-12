@@ -127,7 +127,7 @@ class InviteController extends Controller
         }
 
 
-        $send_sms = (new WalletChangoUtils())->send_sms($phone_no . "0", $message)[0];
+        $send_sms = (new WalletChangoUtils())->send_sms($phone_no, $message)[0];
         if ($send_sms->status == "success") {
             $response = api_response(true, null, 0, "success",
                 "send invite successfully", null);

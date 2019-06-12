@@ -2171,8 +2171,8 @@ __webpack_require__.r(__webpack_exports__);
       group_details: [],
       form: new Form({
         phone_no: '',
-        invite_type: 1,
-        project_id: this.id
+        invite_type: 0,
+        group_id: this.id
       })
     };
   },
@@ -2240,13 +2240,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_morris__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-morris */ "./node_modules/vue-morris/dist/vue-morris.min.js");
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var vue_morris__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-morris */ "./node_modules/vue-morris/dist/vue-morris.min.js");
 /* harmony import */ var vue_morris__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_morris__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -2346,7 +2341,47 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['id'],
@@ -2381,6 +2416,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         a: 30,
         b: 20
       }],
+      form: new Form({
+        phone_no: '',
+        invite_type: 1,
+        project_id: this.id
+      }),
       bar_Data: [],
       barData: [{
         "month": "January",
@@ -2437,6 +2477,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     console.log('Component mounted.');
   },
   methods: {
+    open_my_modal: function open_my_modal() {
+      $("#send_invite").modal('show');
+    },
     // fetch_payments() {
     //     this.$store.dispatch('get_payments', this.id)
     // },
@@ -2445,9 +2488,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     fetch_project_details: function fetch_project_details() {
       this.$store.dispatch('get_project', this.id);
+    },
+    sendUserInvite: function sendUserInvite() {
+      this.$store.dispatch("send_group_invite", this.form);
     }
   },
-  computed: _objectSpread({
+  computed: {
     // load_all_payments() {
     //     return this.all_payments = this.$store.getters.ALL_PAYMENTS
     // },
@@ -2456,8 +2502,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     load_project_details: function load_project_details() {
       return this.project_details = this.$store.getters.PROJECT_DETAILS;
+    },
+    load_send_group_invite: function load_send_group_invite() {
+      return this.group_details = this.$store.getters.GROUP_CREATION_RESPONSE;
     }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(['project_monthly_payments'])),
+  },
   created: function created() {
     // this.fetch_payments();
     this.fetch_project_details();
@@ -2478,9 +2527,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (new_ != old) {
         this.barData = new_;
       }
+    },
+    load_send_group_invite: function load_send_group_invite(new_, old) {
+      if (new_ == 1) {
+        this.group_details = new_;
+        $("#send_invite").modal('hide');
+      }
     }
   }
 });
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 
@@ -43127,7 +43183,13 @@ var render = function() {
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-sm-12" }, [
           _c("div", { staticClass: "card" }, [
-            _vm._m(0),
+            _c("div", { staticClass: "card-header border-transparent" }, [
+              _c("h3", { staticClass: "card-title" }, [
+                _vm._v(_vm._s(_vm.project_details.project_name) + " Project")
+              ]),
+              _vm._v(" "),
+              _vm._m(0)
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-sm-6" }, [
@@ -43144,14 +43206,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _c("span", { staticClass: "username" }, [
-                        _c("a", { attrs: { href: "#" } }, [
-                          _vm._v(
-                            "Created By - " +
-                              _vm._s(_vm.project_details.user["name"])
-                          )
-                        ])
-                      ]),
+                      _c("span", { staticClass: "username" }),
                       _vm._v(" "),
                       _c("span", { staticClass: "description" }, [
                         _vm._v(_vm._s(_vm.project_details.project_description))
@@ -43174,12 +43229,25 @@ var render = function() {
                       _vm._v(
                         "Amount collected " +
                           _vm._s(_vm.project_details.amount_collected) +
-                          " out of\n                                        " +
+                          " out of\n                                            " +
                           _vm._s(_vm.project_details.project_target_amount)
                       )
                     ]),
                     _vm._v(" "),
-                    _vm._m(1),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-default btn-xs",
+                        attrs: { type: "button" },
+                        on: { click: _vm.open_my_modal }
+                      },
+                      [
+                        _c("i", { staticClass: "fa fa-share" }),
+                        _vm._v(
+                          "\n                                            Invite Members\n                                        "
+                        )
+                      ]
+                    ),
                     _vm._v(" "),
                     _c("span", { staticClass: "pull-right text-muted" }, [
                       _vm._v(
@@ -43206,7 +43274,7 @@ var render = function() {
                         _c("p", [
                           _vm._v(
                             _vm._s(_vm.project_details.project_details) +
-                              "\n                                        "
+                              "\n                                            "
                           )
                         ])
                       ]
@@ -43243,7 +43311,115 @@ var render = function() {
           ])
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade in",
+        attrs: { id: "send_invite", role: "dialog" }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.sendUserInvite()
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.phone_no,
+                              expression: "form.phone_no"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          class: {
+                            "is-invalid": _vm.form.errors.has("phone_no")
+                          },
+                          attrs: {
+                            type: "text",
+                            name: "phone_no",
+                            placeholder: "Phone Number",
+                            id: "phone_no"
+                          },
+                          domProps: { value: _vm.form.phone_no },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "phone_no",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("has-error", {
+                          attrs: { form: _vm.form, field: "phone_no" }
+                        })
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger pull-left",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("Close\n                            ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { disabled: _vm.form.busy, type: "submit" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                Invite\n                            "
+                        )
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -43251,42 +43427,43 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header border-transparent" }, [
-      _c("div", { staticClass: "card-tools" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-tool",
-            attrs: { type: "button", "data-widget": "collapse" }
-          },
-          [_c("i", { staticClass: "fa fa-minus" })]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-tool",
-            attrs: { type: "button", "data-widget": "remove" }
-          },
-          [_c("i", { staticClass: "fa fa-times" })]
-        )
-      ])
+    return _c("div", { staticClass: "card-tools" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-tool",
+          attrs: { type: "button", "data-widget": "collapse" }
+        },
+        [_c("i", { staticClass: "fa fa-minus" })]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-tool",
+          attrs: { type: "button", "data-widget": "remove" }
+        },
+        [_c("i", { staticClass: "fa fa-times" })]
+      )
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-default btn-xs", attrs: { type: "button" } },
-      [
-        _c("i", { staticClass: "fa fa-share" }),
-        _vm._v(
-          "\n                                        Invite Members\n                                    "
-        )
-      ]
-    )
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Send Invite")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-3" }, [
+        _c("label", { attrs: { for: "phone_no" } })
+      ])
+    ])
   }
 ]
 render._withStripped = true

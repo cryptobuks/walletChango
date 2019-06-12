@@ -192,7 +192,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close
                             </button>
-                            <button  :disabled="form.busy" type="submit" class="btn btn-primary">
+                            <button :disabled="form.busy" type="submit" class="btn btn-primary">
                                 Invite
                             </button>
 
@@ -217,8 +217,8 @@
                 group_details: [],
                 form: new Form({
                     phone_no: '',
-                    invite_type: 1,
-                    project_id: this.id,
+                    invite_type: 0,
+                    group_id: this.id,
 
                 }),
             }

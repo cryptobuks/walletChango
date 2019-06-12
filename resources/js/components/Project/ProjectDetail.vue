@@ -7,7 +7,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header border-transparent">
-                            <!--                            <h3 class="card-title">{{project_details.project_name}} Project</h3>-->
+                            <h3 class="card-title">{{project_details.project_name}} Project</h3>
 
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-widget="collapse">
@@ -28,8 +28,9 @@
                                             <img class="img-lg"
                                                  :src="'http://192.168.43.101/walletChango/storage/app/public/upload/images/projects/original/'+project_details.image_url"
                                                  alt="User Image">
-                                            <span class="username"><a
-                                                href="#">Created By - {{project_details.user['name']}}</a></span>
+                                            <span class="username">
+<!--                                                <a href="#">Created By - {{project_details.user['name']}}</a>-->
+                                            </span>
                                             <span
                                                 class="description">{{project_details.project_description}}</span>
                                         </div>
@@ -43,7 +44,7 @@
 
                                         <h4>Amount collected {{project_details.amount_collected}} out of
                                             {{project_details.project_target_amount}}</h4>
-                                        <button type="button" class="btn btn-default btn-xs"><i
+                                        <button type="button" class="btn btn-default btn-xs" @click="open_my_modal"><i
                                             class="fa fa-share"></i>
                                             Invite Members
                                         </button>
@@ -94,12 +95,51 @@
             </div>
 
         </div>
+        <div class="modal fade in" id="send_invite" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <!-- form start -->
+                        <h5 class="modal-title">Send Invite</h5>
+                    </div>
+                    <form @submit.prevent="sendUserInvite()">
+                        <div class="modal-body">
+                            <div class="form-group">
+
+                                <div class="row">
+                                    <div class="col-3">
+                                        <label for="phone_no"></label>
+                                    </div>
+                                </div>
+                                <input v-model="form.phone_no" type="text" name="phone_no"
+                                       placeholder="Phone Number"
+                                       id="phone_no"
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('phone_no') }">
+                                <has-error :form="form" field="phone_no"></has-error>
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close
+                            </button>
+                            <button :disabled="form.busy" type="submit" class="btn btn-primary">
+                                Invite
+                            </button>
+
+                        </div>
+                    </form>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
     </div>
 </template>
 
 <script>
     import {BarChart, DonutChart, LineChart} from 'vue-morris'
-    import {mapState} from "vuex";
 
     export default {
 
@@ -121,7 +161,13 @@
                         {year: '2015', a: 20, b: 25},
                         {year: '2016', a: 30, b: 20},
                     ],
-                bar_Data:[],
+                form: new Form({
+                    phone_no: '',
+                    invite_type: 1,
+                    project_id: this.id,
+
+                }),
+                bar_Data: [],
                 barData: [{"month": "January", "payment_amount": 225}, {
                     "month": "February",
                     "payment_amount": 107
@@ -153,6 +199,9 @@
         mounted() {
             console.log('Component mounted.')
         }, methods: {
+            open_my_modal() {
+                $("#send_invite").modal('show');
+            },
             // fetch_payments() {
             //     this.$store.dispatch('get_payments', this.id)
             // },
@@ -162,6 +211,9 @@
             fetch_project_details() {
                 this.$store.dispatch('get_project', this.id)
             },
+            sendUserInvite() {
+                this.$store.dispatch("send_group_invite", this.form);
+            }
 
         },
         computed: {
@@ -174,8 +226,9 @@
             load_project_details() {
                 return this.project_details = this.$store.getters.PROJECT_DETAILS
             },
-            ...mapState(['project_monthly_payments'])
-
+            load_send_group_invite() {
+                return this.group_details = this.$store.getters.GROUP_CREATION_RESPONSE
+            }
         },
         created() {
             // this.fetch_payments();
@@ -200,6 +253,13 @@
                     this.barData = new_;
                 }
             },
+            load_send_group_invite(new_, old) {
+                if (new_ == 1) {
+                    this.group_details = new_;
+                    $("#send_invite").modal('hide');
+
+                }
+            }
 
         }
     }

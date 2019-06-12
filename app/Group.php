@@ -25,7 +25,7 @@ class   Group extends Model
     public function getGroupPaymentsAttribute()
     {
 
-        $payments = Payments_::with(['project'])->where('group_id', $this->id)->get();
+        $payments = Payments_::with(['project', 'user'])->where('group_id', $this->id)->get();
         return $payments;
     }
 

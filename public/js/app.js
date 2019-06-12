@@ -2077,6 +2077,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['id'],
   data: function data() {
@@ -42078,7 +42125,89 @@ var render = function() {
         _vm._m(5)
       ]),
       _vm._v(" "),
-      _vm._m(6)
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-sm-6" }, [
+          _c("div", { staticClass: "card" }, [
+            _vm._m(6),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body p-0" }, [
+              _c("div", { staticClass: "table-responsive" }, [
+                _c("table", { staticClass: "table m-0" }, [
+                  _vm._m(7),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.group_details.group_members, function(
+                      membership
+                    ) {
+                      return _c("tr", [
+                        _c("td", [
+                          _c("a", { attrs: { href: "#" } }, [
+                            _vm._v(_vm._s(membership.user.name))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(membership.joined_when))])
+                      ])
+                    }),
+                    0
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(8)
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-6" }, [
+          _c("div", { staticClass: "card" }, [
+            _vm._m(9),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body p-0" }, [
+              _c("div", { staticClass: "table-responsive" }, [
+                _c("table", { staticClass: "table m-0" }, [
+                  _vm._m(10),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.group_details.group_payments, function(
+                      payments
+                    ) {
+                      return _c("tr", [
+                        _c("td", [
+                          _c("a", { attrs: { href: "#" } }, [
+                            _vm._v(_vm._s(payments.payment_reference))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(payments.payment_amount))]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("span", { staticClass: "badge " }, [
+                            _vm._v(_vm._s(payments.user.name))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            "\n                                        " +
+                              _vm._s(payments.project[0].project_name) +
+                              "\n                                    "
+                          )
+                        ])
+                      ])
+                    }),
+                    0
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(11)
+          ])
+        ])
+      ])
     ])
   ])
 }
@@ -42167,76 +42296,132 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-sm-8" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header border-transparent" }, [
-            _c("h3", { staticClass: "card-title" }, [
-              _vm._v("Latest Payments")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-tools" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-tool",
-                  attrs: { type: "button", "data-widget": "collapse" }
-                },
-                [_c("i", { staticClass: "fa fa-minus" })]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-tool",
-                  attrs: { type: "button", "data-widget": "remove" }
-                },
-                [_c("i", { staticClass: "fa fa-times" })]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body p-0" }, [
-            _c("div", { staticClass: "table-responsive" }, [
-              _c("table", { staticClass: "table m-0" }, [
-                _c("thead", [
-                  _c("tr", [
-                    _c("th", [_vm._v("Pament ID")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Amount")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("User")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Project")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("tbody")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-footer clearfix" }, [
-            _c(
-              "a",
-              {
-                staticClass: "btn btn-sm btn-info float-left",
-                attrs: { href: "javascript:void(0)" }
-              },
-              [_vm._v("Place New Paymnet")]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "btn btn-sm btn-secondary float-right",
-                attrs: { href: "javascript:void(0)" }
-              },
-              [_vm._v("View All\n                            Payments")]
-            )
-          ])
-        ])
+    return _c("div", { staticClass: "card-header border-transparent" }, [
+      _c("h3", { staticClass: "card-title" }, [_vm._v("Members")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-tool",
+            attrs: { type: "button", "data-widget": "collapse" }
+          },
+          [_c("i", { staticClass: "fa fa-minus" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-tool",
+            attrs: { type: "button", "data-widget": "remove" }
+          },
+          [_c("i", { staticClass: "fa fa-times" })]
+        )
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Member Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Joined At")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-footer clearfix" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-sm btn-info float-left",
+          attrs: { href: "javascript:void(0)" }
+        },
+        [_vm._v("Place New Paymnet")]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-sm btn-secondary float-right",
+          attrs: { href: "javascript:void(0)" }
+        },
+        [_vm._v("View All\n                            Payments")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header border-transparent" }, [
+      _c("h3", { staticClass: "card-title" }, [_vm._v("Latest Payments")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-tool",
+            attrs: { type: "button", "data-widget": "collapse" }
+          },
+          [_c("i", { staticClass: "fa fa-minus" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-tool",
+            attrs: { type: "button", "data-widget": "remove" }
+          },
+          [_c("i", { staticClass: "fa fa-times" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Payment ID")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Amount")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("User")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Project")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-footer clearfix" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-sm btn-info float-left",
+          attrs: { href: "javascript:void(0)" }
+        },
+        [_vm._v("Place New Paymnet")]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-sm btn-secondary float-right",
+          attrs: { href: "javascript:void(0)" }
+        },
+        [_vm._v("View All\n                            Payments")]
+      )
     ])
   }
 ]

@@ -65,7 +65,53 @@
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-header border-transparent">
+                            <h3 class="card-title">Members</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-widget="remove">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table m-0">
+                                    <thead>
+                                    <tr>
+                                        <th>Member Name</th>
+                                        <th>Joined At</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="membership in group_details.group_members">
+                                        <td><a href="#">{{membership.user.name}}</a>
+                                        </td>
+                                        <td>{{membership.joined_when}}</td>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer clearfix">
+                            <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Paymnet</a>
+                            <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All
+                                Payments</a>
+                        </div>
+                        <!-- /.card-footer -->
+                    </div>
+                </div>
+                <div class="col-sm-6">
                     <div class="card">
                         <div class="card-header border-transparent">
                             <h3 class="card-title">Latest Payments</h3>
@@ -85,22 +131,23 @@
                                 <table class="table m-0">
                                     <thead>
                                     <tr>
-                                        <th>Pament ID</th>
+                                        <th>Payment ID</th>
                                         <th>Amount</th>
                                         <th>User</th>
                                         <th>Project</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <!--                                    <tr v-for="payments in all_payments">-->
-                                    <!--                                        <td><a href="pages/examples/invoice.html">{{payments.payment_reference}}</a>-->
-                                    <!--                                        </td>-->
-                                    <!--                                        <td>{{payments.payment_amount}}</td>-->
-                                    <!--                                        <td><span class="badge ">{{payments.user.name}}</span></td>-->
-                                    <!--                                        <td>-->
-                                    <!--                                            {{payments.project.project_name}}-->
-                                    <!--                                        </td>-->
-                                    <!--                                    </tr>-->
+                                    <tr v-for="payments in group_details.group_payments">
+                                        <td><a href="#">{{payments.payment_reference}}</a>
+                                        </td>
+                                        <td>{{payments.payment_amount}}</td>
+                                        <td><span class="badge ">{{payments.user.name}}</span></td>
+
+                                        <td>
+                                            {{payments.project[0].project_name}}
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>

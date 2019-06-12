@@ -18,12 +18,12 @@ class CreateProjectsTable extends Migration
             $table->string('project_name');
             $table->string('project_description');
             $table->string('project_details');
-            $table->string('image_url')->nullable();
-            $table->integer('target_group_number');
+            $table->string('image_url')->nullable()->default('crowd_fund3.jpg');
+            $table->integer('target_group_number')->nullable();
             $table->integer('members_subscribed')->nullable()->default(0);
             $table->integer('project_target_amount')->nullable();
-            $table->integer('project_initiated_by');
-            $table->integer('group_id');
+            $table->integer('project_initiated_by')->nullable();
+            $table->integer('group_id')->nullable();
             $table->integer('status')->nullable();
             $table->integer('project_type')->default(0);
             $table->softDeletes();

@@ -7,7 +7,8 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>{{group_details.members_count}}</h3>
+                            <h3>150</h3>
+
                             <p>Members</p>
                         </div>
                         <div class="icon">
@@ -21,7 +22,7 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>{{group_details.group_payments_total}}<sup style="font-size: 20px">Kshs</sup></h3>
+                            <h3>53<sup style="font-size: 20px">%</sup></h3>
 
                             <p>Members Contribution</p>
                         </div>
@@ -65,53 +66,7 @@
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-sm-6">
-                    <div class="card">
-                        <div class="card-header border-transparent">
-                            <h3 class="card-title">Members</h3>
-
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-widget="collapse">
-                                    <i class="fa fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-tool" data-widget="remove">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body p-0">
-                            <div class="table-responsive">
-                                <table class="table m-0">
-                                    <thead>
-                                    <tr>
-                                        <th>Member Name</th>
-                                        <th>Joined At</th>
-
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr v-for="membership in group_details.group_members">
-                                        <td><a href="#">{{membership.user.name}}</a>
-                                        </td>
-                                        <td>{{membership.joined_when}}</td>
-
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer clearfix">
-                            <a>Invite Members</a>
-                            <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All
-                                Payments</a>
-                        </div>
-                        <!-- /.card-footer -->
-                    </div>
-                </div>
-                <div class="col-sm-6">
+                <div class="col-sm-8">
                     <div class="card">
                         <div class="card-header border-transparent">
                             <h3 class="card-title">Latest Payments</h3>
@@ -131,21 +86,20 @@
                                 <table class="table m-0">
                                     <thead>
                                     <tr>
-                                        <th>Payment ID</th>
+                                        <th>Pament ID</th>
                                         <th>Amount</th>
                                         <th>User</th>
                                         <th>Project</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr v-for="payments in group_details.group_payments">
-                                        <td><a href="#">{{payments.payment_reference}}</a>
+                                    <tr v-for="payments in all_payments">
+                                        <td><a href="pages/examples/invoice.html">{{payments.payment_reference}}</a>
                                         </td>
                                         <td>{{payments.payment_amount}}</td>
                                         <td><span class="badge ">{{payments.user.name}}</span></td>
-
                                         <td>
-                                            {{payments.project[0].project_name}}
+                                           {{payments.project.project_name}}
                                         </td>
                                     </tr>
                                     </tbody>
@@ -171,42 +125,31 @@
 <script>
 
     export default {
-        props: ['id'],
+        props: ['group_id'],
         data() {
             return {
                 all_payments: [],
-                group_details: [],
             }
         },
         mounted() {
             console.log('Component mounted.')
         }, methods: {
             fetch_payments() {
-                this.$store.dispatch('get_payments', this.id)
-            }, fetch_group_details() {
-                this.$store.dispatch('get_group_details', this.id)
+                this.$store.dispatch('get_payments', this.group_id)
             }
         },
         computed: {
             load_all_payments() {
                 return this.all_payments = this.$store.getters.ALL_PAYMENTS
-            }, load_all_group_details() {
-                return this.group_details = this.$store.getters.ALL_GROUP_DETAILS
             }
         },
         created() {
             this.fetch_payments();
-            this.fetch_group_details();
         },
         watch: {
             load_all_payments(new_, old) {
                 if (new_ != old) {
                     this.all_payments = new_;
-                }
-            }, load_all_group_details(new_, old) {
-                if (new_ != old) {
-                    this.group_details = new_;
-
                 }
             }
 

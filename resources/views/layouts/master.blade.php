@@ -185,6 +185,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-users red"></i>
+                            <p>
+                                Users <i class="fa fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview" style="display: none;">
+
+                            <li class="nav-item">
+                                <router-link to="/users" class="nav-link">
+                                    <i class="fas fa-users-o nav-icon"></i>
+
+                                    <p>
+                                        Users
+                                        <!--<span class="right badge badge-danger">New</span>-->
+                                    </p>
+                                </router-link>
+                            </li>
+                            </li>
+                        </ul>
+                    </li>
 
                 </ul>
             </nav>
@@ -214,9 +236,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Main Footer -->
     <footer class="main-footer">
         <!-- To the right -->
-        <div class="float-right d-none d-sm-inline">
-            Anything you want
-        </div>
+
         <!-- Default to the left -->
         <strong>Copyright &copy; 2019- <?php echo date('Y')?> <a href="#x">Wallet Chango</a>.</strong> All rights reserved.
     </footer>

@@ -119,10 +119,39 @@
                                     </div>
                                 </div>
                                 <input v-model="form.project_name" type="text" name="project_name"
-                                       placeholder="project Name"
+                                       placeholder="Project Name"
                                        id="project_name"
+                                       required
                                        class="form-control" :class="{ 'is-invalid': form.errors.has('project_ref') }">
                                 <has-error :form="form" field="project_ref"></has-error>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="row">
+                                    <div class="col-3">
+                                        <label for="project_description"></label>
+                                    </div>
+                                </div>
+                                <input v-model="form.project_description" type="text" name="project_description"
+                                       placeholder="Project Description"
+                                       id="project_description"
+                                       required
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('project_description') }">
+                                <has-error :form="form" field="project_description"></has-error>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="row">
+                                    <div class="col-3">
+                                        <label for="project_description"></label>
+                                    </div>
+                                </div>
+                                <input v-model="form.project_details" type="text" name="project_details"
+                                       placeholder="Project Detailed Description"
+                                       id="project_details"
+                                       required
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('project_description') }">
+                                <has-error :form="form" field="project_description"></has-error>
                             </div>
 
 
@@ -155,7 +184,8 @@
                 editMode: false,
                 form: new Form({
                     project_name: '',
-                    project_description: 0,
+                    project_description: '',
+                    project_details: '',
                     target_group_number: 0,
                     project_target_amount: 0,
                 }),
@@ -190,7 +220,7 @@
                 this.all_projects = _project;
                 return _project;
             }, check_creation_status() {
-                return this.$store.getters.project_CREATION_RESPONSE
+                return this.$store.getters.PROJECTS_CREATION_RESPONSE
             }
         },
         created() {
@@ -199,12 +229,15 @@
         watch: {
             load_all_project(old, new_) {
                 if (old != new_) {
-                    console.log(old)
                     this.all_projects = old;
+                    $('#create_project').modal('hide');
                 }
             },
             // check if created
             check_creation_status(_old, _new) {
+                console.log("old_"+old)
+                console.log("nw_"+_new)
+
                 if (_old == 1) {
                     $('#create_project').modal('hide');
                 } else {

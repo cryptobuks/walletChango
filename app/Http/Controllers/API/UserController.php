@@ -54,7 +54,6 @@ class UserController extends Controller
 
         } else {
             //Attempt validation
-
             $credentials = $request->only(['email', 'password']);
 
             if (!$token = auth()->attempt($credentials)) {
@@ -62,7 +61,7 @@ class UserController extends Controller
                 return api_response(
                     false,
                     ['error' => 'Incorrect credentials'],
-                    0,
+                    1,
                     "Failed",
                     'Your password and user name do no match  ',
                     null
@@ -71,7 +70,7 @@ class UserController extends Controller
                 return api_response(
                     true,
                     null,
-                    1,
+                    0,
                     "Success",
                     'You have successfully logged in ',
                     ["token" => $token]

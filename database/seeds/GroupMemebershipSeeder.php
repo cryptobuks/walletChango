@@ -11,6 +11,6 @@ class GroupMemebershipSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\GroupMembership::class, 15)->create();
+        factory(App\GroupMembership::class, 5)->create();
     }
 }

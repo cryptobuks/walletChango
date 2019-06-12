@@ -3,32 +3,26 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card card-default">
-                    <div class="card-header">Group
+                    <div class="card-header">Wallet
 
-                        <button class="btn btn-success  right float-right"
+                        <button class="btn btn-success right"
                                 @click="open_my_modal">
-                            New Group
+                            New Wallet
                             <i class="nav-icon fas fa-plus-square "></i>
                         </button>
                     </div>
 
                     <div class="card-body">
                         <div class="row">
-                            <div v-for="chama in all_groups" class="col-md-3 col-sm-6 col-12">
+                            <div v-for="wallet in all_wallets" class="col-md-3 col-sm-6 col-12">
                                 <div class="info-box bg-info">
                                     <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
 
                                     <div class="info-box-content">
-                                        <span class="info-box-text">{{chama.group_name}}</span>
-                                        <span class="info-box-number">{{chama.members_count}} Members</span>
+                                        <span class="info-box-text">{{wallet.wallet_name}}</span>
+                                        <span class="info-box-number">{{wallet.wallet_amount}} Kshs</span>
 
-                                        <div class="progress">
-                                            <div class="progress-bar" :style="{width: chama.members_count+'%'}"></div>
-                                        </div>
-                                        <span class="progress-description">
-                                          30% Increase in 30 Days
-                                        </span>
-                                        <a class="btn" @click="view_group(chama.id)">View<i
+                                        <a class="btn" @click="view_wallet(wallet.id)">View<i
                                             class=" fas fa-tachometer-alt"></i></a>
                                     </div>
                                     <!-- /.info-box-content -->
@@ -41,31 +35,31 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade in" id="create_group" role="dialog">
+        <div class="modal fade in" id="create_wallet" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
 
 
                     <div class="modal-body">
                         <!-- form start -->
-                        <h5 v-show="!editMode" class="modal-title">New Chamaa</h5>
-                        <h5 v-show="editMode" class="modal-title">Update Chamaa's Information</h5>
+                        <h5 v-show="!editMode" class="modal-title">New Wallet</h5>
+                        <h5 v-show="editMode" class="modal-title">Update Wallet's Information</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form @submit.prevent="editMode ? update_group():create_group()">
+                    <form @submit.prevent="editMode ? update_wallet():create_wallet()">
                         <div class="modal-body">
-                            <div class="form-group">
+                            <div class="form-wallet">
 
                                 <div class="row">
                                     <div class="col-3">
-                                        <label for="group_name"></label>
+                                        <label for="wallet_name"></label>
                                     </div>
                                 </div>
-                                <input v-model="form.group_name" type="text" name="group_name"
-                                       placeholder="Group Name"
-                                       id="group_name"
+                                <input v-model="form.wallet_name" type="text" name="wallet_name"
+                                       placeholder="Wallet Name"
+                                       id="wallet_name"
                                        class="form-control" :class="{ 'is-invalid': form.errors.has('project_ref') }">
                                 <has-error :form="form" field="project_ref"></has-error>
                             </div>
@@ -99,53 +93,54 @@
             return {
                 editMode: false,
                 form: new Form({
-                    group_name: '',
-                    members_count: 0,
-                    group_uuid: 0,
+                    wallet_name: '',
+                    wallet_amount: 0,
+                    user_id: 0,
                 }),
-                all_groups: []
+                all_wallets: []
             }
         },
         mounted() {
             console.log('Component mounted.')
         }, methods: {
-            /** open creating/update of group information**/
+            /** open creating/update of wallet information**/
             open_my_modal() {
-                $("#create_group").modal('show');
+                $("#create_wallet").modal('show');
             },
-            /**group data**/
-            fetch_all_chama() {
-                this.$store.dispatch("get_groups")
+            /**wallet data**/
+            fetch_all_wallet() {
+                this.$store.dispatch("get_wallets")
             },
-            create_group() {
-                this.$store.dispatch("save_groups", this.form);
-            }, view_group(payload) {
-                this.$router.push({path: `group-view/${payload}`, params: {group_id: payload}})
-            }
+            create_wallet() {
+                this.$store.dispatch("save_wallets", this.form);
+            }, view_wallet(payload) {
 
+                this.$router.push({name: 'wallet-view', path: `wallet-view/${payload}`, params: {'wallet_id': payload}})
+            }
         },
         computed: {
-            load_all_chama() {
-                let _group = this.$store.getters.ALL_GROUPS;
-                this.all_groups = _group;
-                return _group;
+            load_all_wallet() {
+                let _wallet = this.$store.getters.ALL_WALLETS;
+                console.log(_wallet)
+                this.all_wallets = _wallet;
+                return _wallet;
             }, check_creation_status() {
-                return this.$store.getters.GROUP_CREATION_RESPONSE
+                return this.$store.getters.WALLETS_CREATE_RESPONSE
             }
         },
         created() {
-            this.fetch_all_chama();
+            this.fetch_all_wallet();
         },
         watch: {
-            load_all_chama(old, new_) {
+            load_all_wallet(old, new_) {
                 if (old != new_) {
-                    this.all_groups = old;
+                    this.all_wallets = old;
                 }
             },
             // check if created
             check_creation_status(_old, _new) {
                 if (_old == 1) {
-                    $('#create_group').modal('hide');
+                    $('#create_wallet').modal('hide');
                 } else {
                     swal.fire(
                         'Failed!',

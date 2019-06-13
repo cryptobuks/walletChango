@@ -18,7 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->string("user_id");
             $table->string("wallet_id");
             $table->string("amount");
-            $table->string("reference")->nullable()->unique();
+            $table->string("reference")->nullable();
             $table->string("transaction_type");
             $table->softDeletes();
             $table->timestamps();

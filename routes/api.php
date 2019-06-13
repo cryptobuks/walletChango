@@ -20,7 +20,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
 
 });
 
-Route::group(['middleware' => ['api', 'jwt.auth']], function () {
+Route::group(['middleware' => ['api',]], function () {
 
     Route::apiResources(['group' => 'API\GroupController']);
     /*--------------------------------------------------------*/

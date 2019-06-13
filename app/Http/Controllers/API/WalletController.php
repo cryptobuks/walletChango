@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\WalletChangoUtils;
 use App\Wallet;
 use Illuminate\Http\Request;
 
@@ -37,18 +38,25 @@ class WalletController extends Controller
      */
     public function store(Request $request)
     {
+        if (isset($request->token)) {
+            $request->headers->set('Authorization', "Bearer " . $request->token);
+        }
+        $check_token = (new WalletChangoUtils())->authenticate_jwt_auth();
+        if ($check_token["success"] == true) {
 
-        $this->validate($request, [
-            'user_id' => 'required|integer',
-            'wallet_name' => 'required',
-            'wallet_amount' => 'required|integer',
-        ]);
-        $new_group = new Wallet();
-        $new_group->wallet_name = $request->all()['wallet_name'];
-        $new_group->user_id = $request->all()['user_id'];
-        $new_group->wallet_amount = $request->all()['wallet_amount'];
-        $new_group->save();
-        return response(wallet::all());
+            $this->validate($request, [
+                'wallet_name' => 'required',
+                'wallet_amount' => 'required|integer',
+            ]);
+            $new_group = new Wallet();
+            $new_group->wallet_name = $request->all()['wallet_name'];
+            $new_group->user_id = $check_token['data']['id'];
+            $new_group->wallet_amount = $request->all()['wallet_amount'];
+            $new_group->save();
+            return response(wallet::all());
+        } else {
+            return $check_token;
+        }
     }
 
     /**
@@ -108,7 +116,7 @@ class WalletController extends Controller
             'transaction_type' => 'required|integer',
         ]);
         $wallet = Wallet::find($request->wallet_id);
-        $wallet['wallet_amount'] =$wallet->wallet_amount+ $request->amount;
+        $wallet['wallet_amount'] = $wallet->wallet_amount + $request->amount;
         $wallet->save();
 
         $transaction = new TransactionController();

@@ -7,15 +7,19 @@ import WalletDetail from "./components/Wallets/WalletDetail";
 import User from "./components/Users/User";
 import UserDetail from "./components/Users/UserDetail";
 import UserLogin from "./components/Users/UserLogin";
+import GroupTransaction from "./components/Group/GroupTransaction";
+import ProjectTransactions from "./components/Project/ProjectTransactions";
 
 
 const routes = [
     {path: '/groups', component: Group},
     {path: '/group-view/:id', name: 'group-view', component: GroupDetail, props: true},
+    {path: '/group-transactions', name: 'group-transaction', component: GroupTransaction, props: true},
 
 
     {path: '/projects', component: Projects},
     {path: '/project-view/:id', name: 'project-view', component: ProjectDetail, props: true},
+    {path: '/project-transactions', name: 'project-transactions', component: ProjectTransactions, props: true},
 
     {path: '/wallets', component: Wallets},
     {path: '/wallet-view/:id', name: 'wallet-view', component: WalletDetail, props: true},

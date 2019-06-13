@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -58,7 +59,7 @@ class UserController extends Controller
 
             if (!$token = auth()->attempt($credentials)) {
 
-                return api_response(
+                $response = api_response(
                     false,
                     ['error' => 'Incorrect credentials'],
                     1,
@@ -67,17 +68,21 @@ class UserController extends Controller
                     null
                 );
             } else {
-                return api_response(
+                $user = Auth::user();
+                $user['token'] = $token;
+                $response = api_response(
                     true,
                     null,
                     0,
                     "Success",
                     'You have successfully logged in ',
-                    ["token" => $token]
+                    $user
                 );
             }
 
         }
+
+        return response()->json($response);
     }
 
 

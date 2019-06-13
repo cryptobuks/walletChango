@@ -280,7 +280,7 @@ const store = new Vuex.Store({
             axios.post(baseURL + '/auth/authenticate/', payload, config).then(response => {
                 console.log(response.data)
                 console.log("reposne server")
-                context.commit("SET_AUTH_TOKEN", response.data);
+                context.commit("SET_AUTH_TOKEN", response.data.data.token);
                 console.log(response.data);
                 if (response.status == 200) {
                     if (response.data.status_code == 0) {

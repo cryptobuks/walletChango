@@ -34,6 +34,12 @@ Route::group(['middleware' => ['api',]], function () {
     Route::apiResources(['payment' => 'API\PaymentsController']);
     Route::get('payment/group/{group}', 'API\PaymentsController@show');
 
+    Route::apiResources(['investments' => 'API\InvestmentsController']);
+
+
+    Route::post('user_invest', 'API\WalletController@user_invest');
+
+    Route::apiResources(['project_membership' => 'API\ProjectMembershipController']);
 
     /*--------------------------------------------------------*/
 //            Projects routes

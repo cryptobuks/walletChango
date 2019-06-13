@@ -270,8 +270,8 @@
                     project_id: this.id,
 
                 }),
-                bar_Data: [],
-                barData: [{"month": "January", "payment_amount": 225}, {
+                barData: [],
+                bar_Data: [{"month": "January", "payment_amount": 225}, {
                     "month": "February",
                     "payment_amount": 107
                 }, {"month": "March", "payment_amount": 231}, {

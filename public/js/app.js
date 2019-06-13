@@ -2702,8 +2702,8 @@ __webpack_require__.r(__webpack_exports__);
         invite_type: 1,
         project_id: this.id
       }),
-      bar_Data: [],
-      barData: [{
+      barData: [],
+      bar_Data: [{
         "month": "January",
         "payment_amount": 225
       }, {

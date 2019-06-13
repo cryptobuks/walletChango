@@ -4,8 +4,11 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\WalletChangoUtils;
+use App\Investments;
+use App\Transactions;
 use App\Wallet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class WalletController extends Controller
 {
@@ -69,6 +72,67 @@ class WalletController extends Controller
     {
         return Wallet::with('user')->where('user_id', $id)->first();
 
+    }
+
+    public function user_invest(Request $request)
+    {
+
+
+        if (isset($request->token)) {
+            $request->headers->set('Authorization', "Bearer " . $request->token);
+        }
+        $check_token = (new WalletChangoUtils())->authenticate_jwt_auth();
+
+        if ($check_token["success"] == true) {
+
+            $validator = $validator = Validator::make($request->all(), [
+                'project_id' => 'required',
+                'amount' => 'required',
+            ]);
+
+
+            if (!$validator->passes()) {
+                return api_response(
+                    false,
+                    $validator->errors()->all(),
+                    1,
+                    'failed',
+                    "Some entries are missing",
+                    null
+                );
+
+            }
+            $wallet = Wallet::where("user_id", $check_token['data']['id'])->first();
+
+            if ($wallet->wallet_amount > $request->amount) {
+
+                $wallet->wallet_amount = $wallet->wallet_amount - $request->amount;
+                $wallet->save();
+
+
+                $investment = new Investments();
+                $investment->user_id = $check_token['data']['id'];
+                $investment->project_id = $request->project_id;
+                $investment->invest_amount = $request->amount;
+                $investment->save();
+
+
+                $transaction = new Transactions();
+                $transaction->user_id = $check_token['data']['id'];
+                $transaction->wallet_id = $wallet->id;
+                $transaction->amount = $request->amount;
+                $transaction->reference = "Wal_" . $request->wallet_id . "inv_" . $investment->id;
+                $transaction->transaction_type = 1;
+                $transaction->save();
+
+                if ($transaction) {
+                    return api_response(true, null, 0, "success", "successful investment", null);
+                }
+            } else {
+                return api_response(0, "Amount less than wallet. You have " . $wallet->wallet_amount, 1, 'success', "You dont have enough money in  your wallet",
+                    null);
+            }
+        }
     }
 
     /**

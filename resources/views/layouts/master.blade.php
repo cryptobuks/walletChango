@@ -95,18 +95,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </p>
                                 </router-link>
                             </li>
-                            <li class="nav-item">
-                                <a href="../UI/buttons.html" class="nav-link">
-                                    <i class="fas fa-circle-o nav-icon"></i>
-                                    <p>Buttons</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="../UI/sliders.html" class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>Sliders</p>
-                                </a>
-                            </li>
+
+
                         </ul>
                     </li>
                     <li class="nav-item has-treeview">
@@ -128,18 +118,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </p>
                                 </router-link>
                             </li>
-                            <li class="nav-item">
-                                <a href="../UI/buttons.html" class="nav-link">
-                                    <i class="fas fa-circle-o nav-icon"></i>
-                                    <p>Buttons</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="../UI/sliders.html" class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>Sliders</p>
-                                </a>
-                            </li>
+
                         </ul>
                     </li>
                     <li class="nav-item has-treeview">

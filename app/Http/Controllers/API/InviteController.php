@@ -126,7 +126,21 @@ class InviteController extends Controller
                 $group->group_name . " use code " . $code . $invite_code . " to join";
 
         }
-
+        $invite = new Invites();
+        if (isset($user_id) && $user_id != "")
+            $invite->user_id = $user_id;
+        $invite->phone_no = $phone_no;
+        $invite->invite_by = $invite_by;
+        $invite->invite_type = $request->invite_type;
+        $invite->invite_code = $code . $invite_code;
+        if (isset($request->project_id)) {
+            $invite->project_id = $request->project_id;
+        }
+        if (isset($request->project_id)) {
+            $invite->group_id = $request->group_id;
+        }
+        $invite->invite_status = 0;
+        $invite->save();
 
         $send_sms = (new WalletChangoUtils())->send_sms($phone_no, $message)[0];
         if (strtolower($send_sms->status) == "success") {
@@ -136,33 +150,19 @@ class InviteController extends Controller
             $response = api_response(true, null, 1, "failed",
                 $send_sms->status, null);
         }
-        if ($response["status_code"] == 0) {
-            $invite = new Invites();
-            if (isset($user_id) && $user_id != "")
-                $invite->user_id = $user_id;
-            $invite->phone_no = $phone_no;
-            $invite->invite_by = $invite_by;
-            $invite->invite_type = $request->invite_type;
-            $invite->invite_code = $code . $invite_code;
-            if (isset($request->project_id)) {
-                $invite->project_id = $request->project_id;
-            }
-            if (isset($request->project_id)) {
-                $invite->group_id = $request->group_id;
-            }
-            $invite->invite_status = 0;
-            $invite->save();
-            if ($invite) {
-                return api_response(true, null, 0, "success",
-                    "Send invite successfully", null);
-            } else {
-                return $response = api_response(true, null, 1, "failed",
-                    "Inivte not sent ", null);
+//        if ($response["status_code"] == 0) {
 
-            }
+        if ($invite) {
+            return api_response(true, null, 0, "success",
+                "Send invite successfully", null);
         } else {
-            return $response;
+            return $response = api_response(true, null, 1, "failed",
+                "Invite not sent ", null);
+
         }
+//        } else {
+//            return $response;
+//        }
     }
 
 

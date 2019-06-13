@@ -202,11 +202,21 @@ class ProjectsController extends Controller
      * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function show($id, Request $request = null)
     {
-//       return $check_token = (new WalletChangoUtils())->stkPush("+254704494519", 100,1);
-
         $projects = Projects::with('user', 'payments')->where('id', $id)->first();
+
+        if (isset($request->token)) {
+            $request->headers->set('Authorization', "Bearer " . $request->token);
+        }
+        $check_token = (new WalletChangoUtils())->authenticate_jwt_auth();
+        $group_member_ship = \App\ProjectMembership::where('user_id', $check_token['data']['id'])->where('group_id', $id)->get();
+
+        if (count($group_member_ship) > 0) {
+            $projects["member"] = true;
+        } else {
+            $projects["member"] = false;
+        }
         $projects->append('project_members')->toArray();
         return $projects;
 

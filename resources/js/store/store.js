@@ -17,6 +17,8 @@ const store = new Vuex.Store({
         group_invite_status: [],
 
 
+        all_transactions: [],
+
         all_payments: [],
 
 
@@ -66,6 +68,10 @@ const store = new Vuex.Store({
             return state.all_payments = payload;
 
         },
+        SET_ALL_TRANSACTIONS: (state, payload) => {
+            return state.all_transactions = payload;
+
+        },
         /*----------------------
          ------payments -------
        /*---------------------*/
@@ -89,6 +95,17 @@ const store = new Vuex.Store({
         },
     },
     actions: {
+        get_transactions: (context) => {
+            let response_data = {};
+            axios.get(baseURL + '/transaction', config).then(response => {
+                console.log(response.data)
+                context.commit("SET_ALL_TRANSACTIONS", response.data);
+                response_data = response.data
+            }).catch(error => {
+                return error;
+            })
+            return response_data
+        },
         get_groups: (context) => {
             let response_data = {};
             axios.get(baseURL + '/group', config).then(response => {
@@ -314,6 +331,7 @@ const store = new Vuex.Store({
         /*----------------------
           ------group -------
         /*---------------------*/
+        ALL_TRANSACTIONS: state => state.all_transactions,
         ALL_GROUPS: state => state.all_groups,
         ALL_GROUP_DETAILS: state => state.group_details,
         GROUP_CREATION_RESPONSE: state => state.group_created_status,

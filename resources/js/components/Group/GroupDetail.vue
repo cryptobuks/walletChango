@@ -31,37 +31,7 @@
                         <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-warning">
-                        <div class="inner">
-                            <h3>44</h3>
 
-                            <p>Projects Running</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-person-add"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-danger">
-                        <div class="inner">
-                            <h3>65</h3>
-
-                            <p>Projects Completed</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-pie-graph"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
             </div>
             <!-- /.row -->
             <div class="row">
@@ -154,15 +124,30 @@
                             <!-- /.table-responsive -->
                         </div>
                         <!-- /.card-body -->
-                        <div class="card-footer clearfix">
-                            <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Paymnet</a>
-                            <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All
-                                Payments</a>
-                        </div>
+
                         <!-- /.card-footer -->
                     </div>
                 </div>
             </div>
+            <div class="card-footer clearfix">
+                <a @click="open_my_modal2" class="btn btn-sm btn-block btn-info float-left">Withdraw </a>
+            </div>
+        </div>
+
+        <div class="modal fade in" id="send_withdrwa" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <!-- form start -->
+                        <h5 class="modal-title">All Members will received a confirmation code</h5>
+                    </div>
+                    <div class="card-footer clearfix">
+                        <a href="javascript:void(0)" class="btn btn-sm btn-block btn-info float-left">Withdraw </a>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
         </div>
         <div class="modal fade in" id="send_invite" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -228,6 +213,8 @@
         }, methods: {
             open_my_modal() {
                 $("#send_invite").modal('show');
+            }, open_my_modal2() {
+                $("#send_withdrwa").modal('show');
             },
             fetch_payments() {
                 this.$store.dispatch('get_payments', this.id)

@@ -193,11 +193,29 @@
                     </div>
                 </div>
 
-
+                <div class="card-footer clearfix">
+                    <a @click="open_my_modal2" class="btn btn-sm btn-block btn-info float-left">Withdraw </a>
+                </div>
             </div>
 
 
         </div>
+        <div class="modal fade in" id="send_withdrwa" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <!-- form start -->
+                        <h5 class="modal-title">All Members will received a confirmation code</h5>
+                    </div>
+                    <div class="card-footer clearfix">
+                        <a href="javascript:void(0)" class="btn btn-sm btn-block btn-info float-left">Withdraw </a>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
         <div class="modal fade in" id="send_invite" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -305,6 +323,9 @@
             open_my_modal() {
                 $("#send_invite").modal('show');
             },
+         open_my_modal2() {
+            $("#send_withdrwa").modal('show');
+        },
             // fetch_payments() {
             //     this.$store.dispatch('get_payments', this.id)
             // },

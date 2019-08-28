@@ -106,8 +106,6 @@ class WalletChangoUtils extends Controller
     //Lipa na M-Pesa Online Payment - Resource URL
     public function stkPush($phone_number, $amount, $user_id) //From AJAX call/android side, etc....start USSD pay request
     {
-
-
         //remove 07 for those that come with it
         if ($this->startsWith($phone_number, "07")) {
             $pos = strpos($phone_number, "07");

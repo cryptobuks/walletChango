@@ -9,6 +9,7 @@ import UserDetail from "./components/Users/UserDetail";
 import UserLogin from "./components/Users/UserLogin";
 import GroupTransaction from "./components/Group/GroupTransaction";
 import ProjectTransactions from "./components/Project/ProjectTransactions";
+import Transaction from "./components/Transactions/Transaction";
 
 
 const routes = [
@@ -20,6 +21,8 @@ const routes = [
     {path: '/projects', component: Projects},
     {path: '/project-view/:id', name: 'project-view', component: ProjectDetail, props: true},
     {path: '/project-transactions', name: 'project-transactions', component: ProjectTransactions, props: true},
+
+    {path: '/transactions', name: 'transactions', component: Transaction, props: true},
 
     {path: '/wallets', component: Wallets},
     {path: '/wallet-view/:id', name: 'wallet-view', component: WalletDetail, props: true},

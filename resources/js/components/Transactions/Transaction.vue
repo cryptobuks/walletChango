@@ -2,97 +2,30 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card card-default">
-                    <div class="card-header">Project
-
-                        <button class="btn btn-success right float-right"
-                                @click="open_my_modal">
-                            New Project
-                            <i class="nav-icon fas fa-plus-square "></i>
-                        </button>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table m-0">
+                            <thead>
+                            <tr>
+                                <th>Transaction ID</th>
+                                <th>Amount</th>
+                                <th>Transacted on</th>
+                                <th>BY</th>
+                                <th>Reference</th>
+                            </tr>
+                            </thead>
+                            <tr v-for="all_transaction in all_transactions">
+                                <td>{{all_transaction.id}}</td>
+                                <td>{{all_transaction.amount}}</td>
+                                <td>{{all_transaction.transaction_at}}</td>
+                                <td>{{all_transaction.user.name}}</td>
+                                <td>{{all_transaction.reference}}</td>
+                            </tr>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
-
-                    <div class="card-body">
-                        <div class="row">
-                            <div v-for="project in all_projects" class="col-md-4 col-sm-4 ">
-                                <div class="info-box ">
-
-                                    <div class="box box-widget widget-user">
-                                        <!-- Add the bg color to the header using any of the bg-* classes -->
-                                        <div class="widget-user-header bg-black"
-                                             :style="{ backgroundImage: 'url( http://192.168.43.101/walletChango/storage/app/public/upload/images/projects/original/' + project.image_url + ')'}">
-                                            <h5 class="widget-user-username">{{project.project_name}}</h5>
-                                            <h5 class="widget-user-desc">Project Name</h5>
-
-                                        </div>
-
-                                        <div class="box-footer">
-                                            <div class="row">
-                                                <div class="col-sm-4 border-right">
-                                                    <div class="description-block">
-                                                        <h5 class="description-header"> {{project.amount_collected}} of
-                                                            {{project.project_target_amount}}</h5>
-                                                        <span class="description-text">Amount Raised</span>
-                                                    </div>
-                                                    <!-- /.description-block -->
-                                                </div>
-                                                <!-- /.col -->
-                                                <div class="col-sm-4 border-right">
-                                                    <div class="description-block">
-                                                        <h5 class="description-header">
-                                                            {{project.members_subscribed}}</h5>
-                                                        <span class="description-text">Members</span>
-                                                    </div>
-                                                    <!-- /.description-block -->
-                                                </div>
-                                                <!-- /.col -->
-                                                <div class="col-sm-4">
-                                                    <div class="description-block">
-                                                        <h5 class="description-header">35</h5>
-                                                        <span class="description-text">PRODUCTS</span>
-                                                    </div>
-                                                    <!-- /.description-block -->
-                                                </div>
-                                                <!-- /.col -->
-                                            </div>
-                                            <div class="row">
-                                                <div class="box-footer box-comments" style="margin:20px">
-                                                    <div class="box-comment">
-                                                        <!-- User image -->
-                                                        <img class="img-circle img-sm"
-                                                             :src="'http://192.168.43.101/walletChango/storage/app/public/upload/images/projects/original/'+project.image_url"
-                                                             alt="User Image">
-
-                                                        <div class="comment-text">
-                                                              <span class="username">
-                                                                  Project Description                                                                <span
-                                                                  class="text-muted pull-right"></span>
-                                                              </span><br/>
-                                                            {{project.project_description}}
-                                                        </div>
-                                                        <!-- /.comment-text -->
-                                                    </div>
-                                                    <!-- /.box-comment -->
-
-                                                </div>
-
-                                            </div>
-                                            <!-- /.row -->
-                                        </div>
-                                        <div class="row" style=" margin:20px">
-                                            <a class="btn btn-block btn-outline-success "
-                                               @click="view_project(project.id)">View</a>
-                                        </div>
-                                    </div>
-
-
-                                    <!-- /.info-box-content -->
-                                </div>
-                                <!-- /.info-box -->
-                            </div>
-                        </div>
-
-                    </div>
+                    <!-- /.table-responsive -->
                 </div>
             </div>
         </div>
@@ -136,7 +69,8 @@
                                        placeholder="Project Description"
                                        id="project_description"
                                        required
-                                       class="form-control" :class="{ 'is-invalid': form.errors.has('project_description') }">
+                                       class="form-control"
+                                       :class="{ 'is-invalid': form.errors.has('project_description') }">
                                 <has-error :form="form" field="project_description"></has-error>
                             </div>
                             <div class="form-group">
@@ -150,7 +84,8 @@
                                        placeholder="Project Detailed Description"
                                        id="project_details"
                                        required
-                                       class="form-control" :class="{ 'is-invalid': form.errors.has('project_description') }">
+                                       class="form-control"
+                                       :class="{ 'is-invalid': form.errors.has('project_description') }">
                                 <has-error :form="form" field="project_description"></has-error>
                             </div>
 
@@ -189,7 +124,7 @@
                     target_group_number: 0,
                     project_target_amount: 0,
                 }),
-                all_projects: [],
+                all_transactions: [],
                 image_url: "http://192.168.43.101/walletChango/storage/app/public/upload/images/projects/original/jesuHoffman_1559488427.jpg"
             }
         },
@@ -201,8 +136,8 @@
                 $("#create_project").modal('show');
             },
             /**project data**/
-            fetch_all_project() {
-                this.$store.dispatch("get_projects")
+            fetch_all_transactions() {
+                this.$store.dispatch("get_transactions")
             },
             create_project() {
                 this.$store.dispatch("save_projects", this.form);
@@ -215,28 +150,29 @@
             }
         },
         computed: {
-            load_all_project() {
-                let _project = this.$store.getters.ALL_PROJECTS;
-                this.all_projects = _project;
-                return _project;
+            load_all_transactions() {
+                let _all_transactions = this.$store.getters.ALL_TRANSACTIONS;
+                this.all_transactions = _all_transactions;
+                console.log(this.all_transactions)
+                return _all_transactions;
             }, check_creation_status() {
                 return this.$store.getters.PROJECTS_CREATION_RESPONSE
             }
         },
         created() {
-            this.fetch_all_project();
+            this.fetch_all_transactions();
         },
         watch: {
-            load_all_project(old, new_) {
+            load_all_transactions(old, new_) {
                 if (old != new_) {
-                    this.all_projects = old;
+                    this.all_transactions = old;
                     $('#create_project').modal('hide');
                 }
             },
             // check if created
             check_creation_status(_old, _new) {
-                console.log("old_"+old)
-                console.log("nw_"+_new)
+                console.log("old_" + old)
+                console.log("nw_" + _new)
 
                 if (_old == 1) {
                     $('#create_project').modal('hide');

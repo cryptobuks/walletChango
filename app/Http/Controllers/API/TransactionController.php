@@ -15,7 +15,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        return $transactions = Transactions::all();
+        return $transactions = Transactions::with('user')->get();
     }
 
     /**

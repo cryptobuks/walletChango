@@ -4,11 +4,13 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\WalletChangoUtils;
+use App\ProjectMembership;
 use App\Projects;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
 class ProjectsController extends Controller
 {
@@ -21,6 +23,13 @@ class ProjectsController extends Controller
     {
 
         $projects = Projects::with('user', 'group', 'payments')->get()->take(15);
+
+        foreach ($projects as $project) {
+            $project_members = ProjectMembership::where('group_id', $project->id)->get();
+            $update_members = Projects::find($project->id);
+            $update_members->members_subscribed = count($project_members);
+            $update_members->save();
+        }
         return $projects;
     }
 

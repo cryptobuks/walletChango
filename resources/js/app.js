@@ -4,6 +4,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import moment from "moment";
+
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -13,6 +15,8 @@ import store from './store/store'
 import routes from './routes'
 import {AlertError, Form, HasError} from 'vform'
 import swal from 'sweetalert2'
+import Raphael from 'raphael/raphael'
+global.Raphael = Raphael
 
 
 
@@ -48,6 +52,7 @@ window.toast = toast;;
 
 const router = new VueRouter({
     mode: 'history',
+    history: true,
     routes
 })
 

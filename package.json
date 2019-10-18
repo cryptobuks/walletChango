@@ -27,9 +27,15 @@
   "dependencies": {
     "admin-lte": "^3.0.0-alpha.2",
     "axios": "^0.18.0",
+    "chart.js": "^2.8.0",
+    "chartkick": "^3.1.0",
+    "hchs-vue-charts": "^1.2.8",
     "moment": "^2.24.0",
     "sweetalert2": "^8.0.7",
     "vform": "^1.0.0",
+    "vue-chartjs": "^3.4.2",
+    "vue-chartkick": "^0.5.1",
+    "vue-morris": "^1.0.1",
     "vue-progressbar": "^0.7.5",
     "vue-router": "^3.0.1",
     "vuex": "^3.1.0"

@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,25 +11,58 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
+    Route::post('authenticate', 'API\UserController@authenticate')->name('api.authenticate');
+
 });
-Route::apiResources(['chamaa' => 'API\ChamaaController']);
 
+Route::group(['middleware' => ['api',]], function () {
 
-
-
-
-/*--------------------------------------------------------*/
+    Route::apiResources(['group' => 'API\GroupController']);
+    /*--------------------------------------------------------*/
 //            Payment routes
-/*--------------------------------------------------------*/
-Route::apiResources(['payment' => 'API\PaymentsController']);
-Route::get('payment/chamaa/{chamaa}' , 'API\PaymentsController@show');
+    /*--------------------------------------------------------*/
+    Route::apiResources(['invite' => 'API\InviteController']);
+
+    /*--------------------------------------------------------*/
+//            Payment routes
+    /*--------------------------------------------------------*/
+    Route::apiResources(['payment' => 'API\PaymentsController']);
+    Route::get('payment/group/{group}', 'API\PaymentsController@show');
+
+    Route::apiResources(['investments' => 'API\InvestmentsController']);
 
 
+    Route::post('user_invest', 'API\WalletController@user_invest');
+
+    Route::apiResources(['project_membership' => 'API\ProjectMembershipController']);
+
+    /*--------------------------------------------------------*/
+//            Projects routes
+    /*--------------------------------------------------------*/
+    Route::apiResources(['project' => 'API\ProjectsController']);
+    Route::get('project/{id}/chart', 'API\ProjectsController@chart_payments');
+
+    /*--------------------------------------------------------*/
+//            Wallet routes
+    /*--------------------------------------------------------*/
+    Route::apiResources(['wallet' => 'API\WalletController']);
+    Route::post('user/deposit', 'API\WalletController@deposit_amount');
 
 
-/*--------------------------------------------------------*/
-//            Proejcts routes
-/*--------------------------------------------------------*/
-Route::apiResources(['project' => 'API\ProjectsController']);
+    /*--------------------------------------------------------*/
+//            User routes
+    /*--------------------------------------------------------*/
+    Route::apiResources(['user' => 'API\UserController']);
+    Route::post('user/login', 'API\UserController@login');
+
+
+    /*--------------------------------------------------------*/
+//            Transaction routes
+    /*--------------------------------------------------------*/
+    Route::apiResources(['transaction' => 'API\TransactionController']);
+});

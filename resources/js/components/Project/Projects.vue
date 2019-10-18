@@ -3,34 +3,89 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card card-default">
-                    <div class="card-header">project
+                    <div class="card-header">Project
 
-                        <button class="btn btn-success right"
+                        <button class="btn btn-success right float-right"
                                 @click="open_my_modal">
-                            New project
+                            New Project
                             <i class="nav-icon fas fa-plus-square "></i>
                         </button>
                     </div>
 
                     <div class="card-body">
                         <div class="row">
-                            <div v-for="project in all_projects" class="col-md-3 col-sm-6 col-12">
-                                <div class="info-box bg-info">
-                                    <span class="info-box-icon"><i class="fas fa- fa-3x orange"></i></span>
+                            <div v-for="project in all_projects" class="col-md-4 col-sm-4 ">
+                                <div class="info-box ">
 
-                                    <div class="info-box-content">
-                                        <span class="info-box-text"><b>Projects Name:</b>{{project.project_name}}</span>
-                                        <span class="info-box-number"><b>Subscribers:</b> {{project.members_subscribed}} </span>
+                                    <div class="box box-widget widget-user">
+                                        <!-- Add the bg color to the header using any of the bg-* classes -->
+                                        <div class="widget-user-header bg-black"
+                                             :style="{ backgroundImage: 'url( http://192.168.43.101/walletChango/storage/app/public/upload/images/projects/original/' + project.image_url + ')'}">
+                                            <h5 class="widget-user-username">{{project.project_name}}</h5>
+                                            <h5 class="widget-user-desc">Project Name</h5>
 
-                                        <div class="progress">
-                                            <div class="progress-bar" :style="{width: project.members_count+'%'}"></div>
                                         </div>
-                                        <span class="progress-description">
-                                          30% Increase in 30 Days
-                                        </span>
-                                        <a class="btn" @click="view_project(project.id)">View<i
-                                            class=" fas fa-tachometer-alt"></i></a>
+
+                                        <div class="box-footer">
+                                            <div class="row">
+                                                <div class="col-sm-4 border-right">
+                                                    <div class="description-block">
+                                                        <h5 class="description-header"> {{project.amount_collected}} of
+                                                            {{project.project_target_amount}}</h5>
+                                                        <span class="description-text">Amount Raised</span>
+                                                    </div>
+                                                    <!-- /.description-block -->
+                                                </div>
+                                                <!-- /.col -->
+                                                <div class="col-sm-4 border-right">
+                                                    <div class="description-block">
+                                                        <h5 class="description-header">
+                                                            {{project.members_subscribed}}</h5>
+                                                        <span class="description-text">Members</span>
+                                                    </div>
+                                                    <!-- /.description-block -->
+                                                </div>
+                                                <!-- /.col -->
+                                                <div class="col-sm-4">
+                                                    <div class="description-block">
+                                                        <h5 class="description-header">35</h5>
+                                                        <span class="description-text">PRODUCTS</span>
+                                                    </div>
+                                                    <!-- /.description-block -->
+                                                </div>
+                                                <!-- /.col -->
+                                            </div>
+                                            <div class="row">
+                                                <div class="box-footer box-comments" style="margin:20px">
+                                                    <div class="box-comment">
+                                                        <!-- User image -->
+                                                        <img class="img-circle img-sm"
+                                                             :src="'http://192.168.43.101/walletChango/storage/app/public/upload/images/projects/original/'+project.image_url"
+                                                             alt="User Image">
+
+                                                        <div class="comment-text">
+                                                              <span class="username">
+                                                                  Project Description                                                                <span
+                                                                  class="text-muted pull-right"></span>
+                                                              </span><br/>
+                                                            {{project.project_description}}
+                                                        </div>
+                                                        <!-- /.comment-text -->
+                                                    </div>
+                                                    <!-- /.box-comment -->
+
+                                                </div>
+
+                                            </div>
+                                            <!-- /.row -->
+                                        </div>
+                                        <div class="row" style=" margin:20px">
+                                            <a class="btn btn-block btn-outline-success "
+                                               @click="view_project(project.id)">View</a>
+                                        </div>
                                     </div>
+
+
                                     <!-- /.info-box-content -->
                                 </div>
                                 <!-- /.info-box -->
@@ -64,10 +119,39 @@
                                     </div>
                                 </div>
                                 <input v-model="form.project_name" type="text" name="project_name"
-                                       placeholder="project Name"
+                                       placeholder="Project Name"
                                        id="project_name"
+                                       required
                                        class="form-control" :class="{ 'is-invalid': form.errors.has('project_ref') }">
                                 <has-error :form="form" field="project_ref"></has-error>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="row">
+                                    <div class="col-3">
+                                        <label for="project_description"></label>
+                                    </div>
+                                </div>
+                                <input v-model="form.project_description" type="text" name="project_description"
+                                       placeholder="Project Description"
+                                       id="project_description"
+                                       required
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('project_description') }">
+                                <has-error :form="form" field="project_description"></has-error>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="row">
+                                    <div class="col-3">
+                                        <label for="project_description"></label>
+                                    </div>
+                                </div>
+                                <input v-model="form.project_details" type="text" name="project_details"
+                                       placeholder="Project Detailed Description"
+                                       id="project_details"
+                                       required
+                                       class="form-control" :class="{ 'is-invalid': form.errors.has('project_description') }">
+                                <has-error :form="form" field="project_description"></has-error>
                             </div>
 
 
@@ -100,11 +184,13 @@
                 editMode: false,
                 form: new Form({
                     project_name: '',
-                    project_description: 0,
+                    project_description: '',
+                    project_details: '',
                     target_group_number: 0,
                     project_target_amount: 0,
                 }),
-                all_projects: []
+                all_projects: [],
+                image_url: "http://192.168.43.101/walletChango/storage/app/public/upload/images/projects/original/jesuHoffman_1559488427.jpg"
             }
         },
         mounted() {
@@ -122,7 +208,10 @@
                 this.$store.dispatch("save_projects", this.form);
             }, view_project(payload) {
 
-                this.$router.push({name: 'project-view',path:`project-view/${payload}`, params: {'project_id': payload}})
+                this.$router.push({
+                    path: `project-view/${payload}`,
+                    params: {project_id: payload}
+                })
             }
         },
         computed: {
@@ -131,7 +220,7 @@
                 this.all_projects = _project;
                 return _project;
             }, check_creation_status() {
-                return this.$store.getters.project_CREATION_RESPONSE
+                return this.$store.getters.PROJECTS_CREATION_RESPONSE
             }
         },
         created() {
@@ -140,12 +229,15 @@
         watch: {
             load_all_project(old, new_) {
                 if (old != new_) {
-                    console.log(old)
                     this.all_projects = old;
+                    $('#create_project').modal('hide');
                 }
             },
             // check if created
             check_creation_status(_old, _new) {
+                console.log("old_"+old)
+                console.log("nw_"+_new)
+
                 if (_old == 1) {
                     $('#create_project').modal('hide');
                 } else {

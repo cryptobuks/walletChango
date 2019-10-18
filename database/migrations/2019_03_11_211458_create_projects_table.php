@@ -17,12 +17,17 @@ class CreateProjectsTable extends Migration
             $table->bigIncrements('id');
             $table->string('project_name');
             $table->string('project_description');
-            $table->string('target_group_number');
-            $table->string('members_subscribed')->nullable()->default(0);
-            $table->string('project_target_amount');
-            $table->string('project_initiated_by');
-            $table->string('group_id');
-            $table->string('amount_collected')->nullable()->default(0);
+            $table->string('project_details');
+            $table->string('image_url')->nullable()->default('crowd_fund3.jpg');
+            $table->integer('target_group_number')->nullable();
+            $table->integer('members_subscribed')->nullable()->default(0);
+            $table->integer('project_target_amount')->nullable();
+            $table->integer('project_initiated_by')->nullable();
+            $table->integer('group_id')->nullable();
+            $table->integer('status')->nullable();
+            $table->integer('project_type')->default(0);
+            $table->softDeletes();
+            $table->float('amount_collected')->nullable()->default(0);
             $table->timestamps();
         });
     }

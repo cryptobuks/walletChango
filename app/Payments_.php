@@ -9,8 +9,9 @@ class Payments_ extends Model
     protected $table = "tbl_payments";
 
     protected $fillable = [
-        'chamaa_name', 'members_count', 'chamaa_uuid'
+        'group_name', 'members_count', 'group_uuid'
     ];
+    protected $appends = ['paid_at'];
 
     public function user()
     {
@@ -19,7 +20,12 @@ class Payments_ extends Model
 
     public function project()
     {
-        return $this->belongsToMany('App\Projects');
+        return $this->hasMany(Projects::class, 'id', 'project_id');
+    }
+
+    public function getPaidAtAttribute()
+    {
+        return $this->created_at->diffForHumans();
     }
 
 }

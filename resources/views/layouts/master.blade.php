@@ -60,12 +60,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="sidebar">
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <img src="img/prof.png" class="img-circle elevation-2" alt="{{ Auth::user()->name }}">
-                </div>
-                <div class="info">
-                    <a href="#" class="d-block">{{ Auth::user()->name }}</a>
-                </div>
+{{--                <div class="image">--}}
+{{--                    <img src="img/prof.png" class="img-circle elevation-2" alt="{{ Auth::user()->name }}">--}}
+{{--                </div>--}}
+{{--                <div class="info">--}}
+{{--                    <a href="#" class="d-block">{{ Auth::user()->name }}</a>--}}
+{{--                </div>--}}
             </div>
 
             <!-- Sidebar Menu -->
@@ -95,18 +95,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </p>
                                 </router-link>
                             </li>
-                            <li class="nav-item">
-                                <a href="../UI/buttons.html" class="nav-link">
-                                    <i class="fas fa-circle-o nav-icon"></i>
-                                    <p>Buttons</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="../UI/sliders.html" class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>Sliders</p>
-                                </a>
-                            </li>
+
+
                         </ul>
                     </li>
                     <li class="nav-item has-treeview">
@@ -128,23 +118,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </p>
                                 </router-link>
                             </li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-wallet orange"></i>
+                            <p>
+                                Wallets <i class="fa fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview" style="display: none;">
+
                             <li class="nav-item">
-                                <a href="../UI/buttons.html" class="nav-link">
+                                <router-link to="/wallets" class="nav-link">
                                     <i class="fas fa-circle-o nav-icon"></i>
-                                    <p>Buttons</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="../UI/sliders.html" class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>Sliders</p>
-                                </a>
+
+                                    <p>
+                                        Wallets
+                                        <!--<span class="right badge badge-danger">New</span>-->
+                                    </p>
+                                </router-link>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-periscope red"></i>
+                            <i class="nav-icon fas fa-list red"></i>
                             <p>
                                 Transactions <i class="fa fa-angle-left right"></i>
                             </p>
@@ -152,26 +152,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <ul class="nav nav-treeview" style="display: none;">
 
                             <li class="nav-item">
-                                <router-link to="/chamaa" class="nav-link">
+                                <router-link to="/transactions" class="nav-link">
                                     <i class="fas fa-circle-o nav-icon"></i>
 
                                     <p>
-                                        Projects
+                                        Transactions
                                         <!--<span class="right badge badge-danger">New</span>-->
                                     </p>
                                 </router-link>
                             </li>
-                            <li class="nav-item">
-                                <a href="../UI/buttons.html" class="nav-link">
-                                    <i class="fas fa-circle-o nav-icon"></i>
-                                    <p>Buttons</p>
-                                </a>
                             </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-users red"></i>
+                            <p>
+                                Users <i class="fa fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview" style="display: none;">
+
                             <li class="nav-item">
-                                <a href="../UI/sliders.html" class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>Sliders</p>
-                                </a>
+                                <router-link to="/users" class="nav-link">
+                                    <i class="fas fa-users-o nav-icon"></i>
+
+                                    <p>
+                                        Users
+                                        <!--<span class="right badge badge-danger">New</span>-->
+                                    </p>
+                                </router-link>
+                            </li>
                             </li>
                         </ul>
                     </li>
@@ -204,11 +215,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Main Footer -->
     <footer class="main-footer">
         <!-- To the right -->
-        <div class="float-right d-none d-sm-inline">
-            Anything you want
-        </div>
+
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2014-2018 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2019- <?php echo date('Y')?> <a href="#x">Wallet Chango</a>.</strong> All rights reserved.
     </footer>
 </div>
 <!-- ./wrapper -->

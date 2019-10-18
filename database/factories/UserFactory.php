@@ -1,8 +1,10 @@
 <?php
 
-use App\Chamaa;
+use App\Group;
 use App\Payments_;
+use App\Projects;
 use App\User;
+use App\wallet;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
@@ -36,24 +38,37 @@ $factory->define(User::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(Chamaa::class, function (Faker $faker) {
+$factory->define(Wallet::class, function (Faker $faker) {
     return [
-        'chamaa_name' => $faker->company,
+        'wallet_name' => $faker->company,
+        'wallet_amount' => 0,
         'created_at' => now(),
         'updated_at' => now(),
-        'chamaa_uuid' => $faker->uuid,
     ];
 });
-$factory->define(\App\Projects::class, function (Faker $faker) {
+
+$factory->define(Group::class, function (Faker $faker) {
+    return [
+        'group_name' => $faker->company,
+        'created_at' => now(),
+        'updated_at' => now(),
+        'group_uuid' => $faker->uuid,
+    ];
+});
+$factory->define(Projects::class, function (Faker $faker) {
     return [
         'project_name' => $faker->name,
         'project_description' => $faker->realText(),
+        'image_url' => $faker->randomElement(['crowd_fund.jpg', 'crowd_fund2.jpg'
+            , 'crowd_fund3.jpg', 'crowd_fund4.jpg', 'crowd_fund5.jpg', 'crowd_fund6.jpg', 'fund.png']),
+        'project_details' => $faker->realText(),
         'target_group_number' => $faker->numberBetween($min = 1, $max = 20),
-        'project_target_amount' => $faker->numberBetween(5, 1000),
+        'project_target_amount' => $faker->numberBetween(100, 1000),
         'members_subscribed' => $faker->numberBetween(5, 15),
         'project_initiated_by' => App\User::all()->random()->id,
-        'amount_collected' => $faker->numberBetween(4, 100),
-        'group_id' => App\Chamaa::all()->random()->id,
+        'amount_collected' => $faker->numberBetween(100, 600),
+        'project_type' => $faker->numberBetween(1, 2),
+        'group_id' => App\Group::all()->random()->id,
         'updated_at' => now(),
         'created_at' => now(),
     ];
@@ -62,11 +77,17 @@ $factory->define(\App\Projects::class, function (Faker $faker) {
 $factory->define(Payments_::class, function (Faker $faker) {
     return [
         'payment_reference' => $faker->name,
-        'payment_amount' => $faker->randomNumber(),
+        'payment_amount' => $faker->numberBetween(100, 600),
         'user_id' => App\User::all()->random()->id,
         'project_id' => App\Projects::all()->random()->id,
-        'chamaa_id' => App\Chamaa::all()->random()->id,
-        'updated_at' => now(),
-        'created_at' => now(),
+//        'group_id' => App\Group::all()->random()->id,
+        'updated_at' => $faker->dateTimeThisYear(),
+        'created_at' => $faker->dateTimeThisYear(),
+    ];
+});
+$factory->define(\App\GroupMembership::class, function (Faker $faker) {
+    return [
+        'group_id' => App\Group::all()->random()->id,
+        'user_id' =>App\User::all()->random()->id,
     ];
 });
